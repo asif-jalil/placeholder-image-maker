@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss';
 import tailwindForms from '@tailwindcss/forms';
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -9,12 +9,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
-      },
       fontFamily: {
-        nunito: ['var(--font-nunito)']
+        'kumbh-sans': ['var(--font-kumbh-sans)']
+      },
+      container: {
+        center: true,
+        padding: '1rem',
+        screens: {
+          sm: '600px',
+          md: '728px',
+          lg: '950px',
+          xl: '950px',
+          '2xl': '950px'
+        }
       }
     }
   },
