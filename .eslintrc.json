@@ -1,3 +1,27 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "react/button-has-type": "off",
+    "react/require-default-props": "off",
+    "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }],
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-misused-promises": "warn",
+    "jsx-a11y/no-redundant-roles": "off",
+    "@typescript-eslint/no-unsafe-member-access": "warn",
+    "@typescript-eslint/no-unsafe-return": "warn",
+    "@typescript-eslint/no-floating-promises": "off",
+    "react/react-in-jsx-scope": "off"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "ignorePatterns": ["tailwind.config.ts", "next.config.mjs", "postcss.config.js"]
 }
