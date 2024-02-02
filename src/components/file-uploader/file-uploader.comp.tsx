@@ -74,7 +74,7 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
               <span className='text-7xl text-emerald-500'>M</span>
               <span className='text-5xl'>aker</span>
             </h1>
-            <p className='text-slate-400'>
+            <p className='text-slate-400 px-12'>
               Generate a temporary image placeholder to use when submitting it to Themeforest or any other online
               marketplace.
             </p>
