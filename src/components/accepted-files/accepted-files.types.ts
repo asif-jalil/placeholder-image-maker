@@ -4,11 +4,11 @@ export type AcceptedFile = {
   id: number;
   size: number;
   type: Format;
-  extension?: string;
+  extension: string;
   height: number;
   width: number;
   previewSrc: string;
-  fileName: string;
+  name: string;
 };
 
 export type AcceptedFilesProps = {

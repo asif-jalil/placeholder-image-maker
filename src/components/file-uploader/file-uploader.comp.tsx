@@ -20,10 +20,10 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
         img.onload = () => {
           const info = {
             id: Date.now(),
-            fileName: file.name,
+            name: file.name.split('.').slice(0, -1).join('.'),
+            extension: file.name.split('.').pop() as string,
             size: file.size,
             type: getImageFormat(file.type as ImageFormatType),
-            extension: file.name.split('.').pop(),
             height: img.height,
             width: img.width,
             previewSrc: URL.createObjectURL(file)
@@ -42,11 +42,12 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
   const onDropRejected = (files: FileRejection[]) => {
     const formattedFiles = files.map((file) => ({
       id: Date.now(),
-      previewSrc: URL.createObjectURL(file.file),
-      fileName: file.file.name,
-      error: file.errors[0].message,
+      name: file.file.name.split('.').slice(0, -1).join('.'),
+      extension: file.file.name.split('.').pop() as string,
       size: file.file.size,
-      type: getImageFormat(file.file.type as ImageFormatType)
+      type: getImageFormat(file.file.type as ImageFormatType),
+      previewSrc: URL.createObjectURL(file.file),
+      error: file.errors[0].message
     }));
     onReject(formattedFiles);
   };

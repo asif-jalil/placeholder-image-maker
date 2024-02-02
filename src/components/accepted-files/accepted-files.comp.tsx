@@ -25,7 +25,7 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
               <div className='w-[50px] h-[50px]'>
                 <Image
                   src={file.previewSrc}
-                  alt={file.fileName}
+                  alt={file.name}
                   width={50}
                   height={50}
                   className='object-cover rounded inline-block h-full w-full'
@@ -47,8 +47,8 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
                 </div>
               </div>
             </div>
-            <div className='me-4'>
-              <h4 className='text-sm font-semibold mb-1'>{file.fileName}</h4>
+            <div className='me-4 w-[300px]'>
+              <h4 className='text-sm font-semibold mb-1'>{[file.name, file.extension].join('.')}</h4>
               <Badge bg={getTypeBadge(file.type)}>{file.type}</Badge>
             </div>
           </div>

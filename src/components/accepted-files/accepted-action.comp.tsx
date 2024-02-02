@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import JSZip from 'jszip';
 
 import byteToMb from '@/utils/byte-to-mb';
-import { donwloadFile, download } from '@/utils/download';
+import { donwloadFile, download, getFileName } from '@/utils/download';
 import makeImage from '@/utils/make-image';
 
 import Badge from '../badge/badge.comp';
@@ -35,7 +35,8 @@ const AcceptedAction = ({ acceptedFiles = [] }: AcceptedActionProps) => {
 
       const byteArray = new Uint8Array(byteNumbers);
 
-      zip.file(file.fileName, byteArray);
+      const fileName = getFileName(file.name, file.extension);
+      zip.file(fileName, byteArray);
     });
 
     zip.generateAsync({ type: 'blob' }).then((blob) => {
