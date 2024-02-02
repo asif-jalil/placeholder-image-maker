@@ -3,8 +3,8 @@ import Image from 'next/image';
 import deleteIcon from '@/assets/images/delete.png';
 import downloadIcon from '@/assets/images/download.png';
 import rightArrowIcon from '@/assets/images/right-arrow.png';
+import donwload from '@/utils/download';
 import getTypeBadge from '@/utils/get-type-badge';
-import makeImage from '@/utils/make-image';
 
 import Badge from '../badge/badge.comp';
 import { AcceptedFile, AcceptedFilesProps } from './accepted-files.types';
@@ -13,17 +13,13 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
   if (!acceptedFiles.length) return null;
 
   const handleDownload = (file: AcceptedFile) => {
-    const dataURI = makeImage(file);
-    const a = document.createElement('a');
-    a.href = dataURI;
-    a.download = file.fileName;
-    a.click();
+    donwload(file);
   };
 
   return (
-    <div className='mb-6 shadow-lg p-3 rounded'>
+    <div className='bg-slate-100 pt-5 pb-3 px-3 rounded-b-lg'>
       {acceptedFiles.map((file) => (
-        <div key={file.previewSrc} className='flex justify-between p-2'>
+        <div key={file.previewSrc} className='flex justify-between p-2 shadow mb-3 bg-white rounded-lg'>
           <div className='flex'>
             <div className='flex items-center me-4 w-[160px]'>
               <div className='w-[50px] h-[50px]'>

@@ -45,6 +45,7 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
       previewSrc: URL.createObjectURL(file.file),
       fileName: file.file.name,
       error: file.errors[0].message,
+      size: file.file.size,
       type: getImageFormat(file.file.type as ImageFormatType)
     }));
     onReject(formattedFiles);
@@ -52,7 +53,7 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: true,
-    maxSize: 5000000,
+    maxSize: 5242880,
     maxFiles: 100,
     onDropAccepted,
     onDropRejected,

@@ -2,10 +2,11 @@ import classNames from 'classnames';
 
 import { BadgeProps } from './badge.types';
 
-const Badge = ({ children, bg = 'blue' }: BadgeProps) => (
+const Badge = ({ children, bg = 'blue', className }: BadgeProps) => (
   <span
     className={classNames(
       'inline-flex items-center rounded px-2 py-[0.125rem] text-[10px] font-medium ring-1 ring-inset uppercase',
+      className,
       {
         'bg-blue-50 text-blue-700 ring-blue-700/10': bg === 'blue',
         'bg-emerald-50 text-emerald-700 ring-emerald-700/10': bg === 'green',

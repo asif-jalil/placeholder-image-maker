@@ -37,7 +37,7 @@ const makeImage = (file: AcceptedFile) => {
 
   const type = ImageFormatType[file.type];
 
-  let dataURI = canvas.toDataURL(type);
+  let dataURI = canvas.toDataURL(type, '0.5');
 
   if (file.type === Format.SVG) {
     const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');

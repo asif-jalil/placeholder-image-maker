@@ -12,9 +12,9 @@ const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
   if (!rejectedFiles.length) return null;
 
   return (
-    <div className='mb-6 shadow-lg p-3 rounded'>
+    <div className='bg-red-50 pt-5 pb-3 px-3 rounded-b-lg'>
       {rejectedFiles.map((file) => (
-        <div key={file.previewSrc} className='flex justify-between p-2'>
+        <div key={file.previewSrc} className='flex justify-between p-2 shadow mb-3 bg-white rounded-lg'>
           <div className='flex'>
             <div className='w-[50px] h-[50px] me-3'>
               <Image

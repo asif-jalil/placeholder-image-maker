@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import AcceptedAction from '@/components/action/accepted-action.comp';
+import RejectedAction from '@/components/action/rejected-action.comp';
 import FileUploader from '@/components/file-uploader/file-uploader.comp';
 import AcceptedFiles from '@/components/files/accepted-files.comp';
 import { AcceptedFile } from '@/components/files/accepted-files.types';
@@ -26,6 +28,10 @@ const Home = () => {
     setAcceptedFiles(files);
   };
 
+  const onClearRejectedFiles = () => {
+    setRejectedFiles([]);
+  };
+
   return (
     <div className='container mx-auto'>
       <FileUploader
@@ -33,8 +39,14 @@ const Home = () => {
         onReject={onReject}
         accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.svg', '.bmp', '.webp'] }}
       />
-      <RejectedFiles rejectedFiles={rejectedFiles} />
-      <AcceptedFiles acceptedFiles={acceptedFiles} onDelete={onDelete} />
+      <div className='mb-6'>
+        <RejectedAction rejectedFiles={rejectedFiles} onClear={onClearRejectedFiles} />
+        <RejectedFiles rejectedFiles={rejectedFiles} />
+      </div>
+      <div className='mb-6'>
+        <AcceptedAction acceptedFiles={acceptedFiles} />
+        <AcceptedFiles acceptedFiles={acceptedFiles} onDelete={onDelete} />
+      </div>
       <Footer />
     </div>
   );

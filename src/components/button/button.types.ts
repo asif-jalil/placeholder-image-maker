@@ -1,5 +1,5 @@
-export type BadgeProps = {
+export type ButtonProps = {
   children: React.ReactNode;
   bg?: 'blue' | 'green' | 'red' | 'gray' | 'yellow';
-  className?: string;
+  onClick?: () => void;
 };

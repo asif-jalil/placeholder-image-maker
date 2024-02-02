@@ -10,4 +10,5 @@ export type RejectedFile = {
   error: string;
   previewSrc: string;
   type: Format;
+  size: number;
 };
