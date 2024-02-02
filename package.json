@@ -15,6 +15,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "classnames": "^2.5.1",
+    "jszip": "^3.10.1",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",

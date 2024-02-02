@@ -1,7 +1,10 @@
 import { useMemo } from 'react';
 
+import JSZip from 'jszip';
+
 import byteToMb from '@/utils/byte-to-mb';
-import donwload from '@/utils/download';
+import { donwloadFile, download } from '@/utils/download';
+import makeImage from '@/utils/make-image';
 
 import Badge from '../badge/badge.comp';
 import Button from '../button/button.comp';
@@ -14,7 +17,29 @@ const AcceptedAction = ({ acceptedFiles = [] }: AcceptedActionProps) => {
 
   const handleDownloadAll = () => {
     acceptedFiles.forEach((file) => {
-      donwload(file);
+      donwloadFile(file);
+    });
+  };
+
+  const handleDownloadAsZip = () => {
+    const zip = new JSZip();
+
+    acceptedFiles.forEach((file) => {
+      const dataUrl = makeImage(file);
+      const byteCharacters = atob(dataUrl.split(',')[1]);
+      const byteNumbers = new Array(byteCharacters.length);
+
+      for (let i = 0; i < byteCharacters.length; i += 1) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+
+      zip.file(file.fileName, byteArray);
+    });
+
+    zip.generateAsync({ type: 'blob' }).then((blob) => {
+      download(URL.createObjectURL(blob), 'placeholder-images.zip');
     });
   };
 
@@ -24,7 +49,12 @@ const AcceptedAction = ({ acceptedFiles = [] }: AcceptedActionProps) => {
         <Badge className='me-3 px-3 text-base'>{byteToMb(totalSize)}MB</Badge>
         <p className='text-lg font-semibold text-white'>Total processing</p>
       </div>
-      <Button onClick={handleDownloadAll}>Download all</Button>
+      <div className='flex gap-2'>
+        <Button onClick={handleDownloadAll}>Download all</Button>
+        <Button onClick={handleDownloadAsZip} bg='yellow'>
+          Download as ZIP
+        </Button>
+      </div>
     </div>
   );
 };

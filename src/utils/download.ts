@@ -2,12 +2,14 @@ import { AcceptedFile } from '@/components/accepted-files/accepted-files.types';
 
 import makeImage from './make-image';
 
-const donwload = (file: AcceptedFile) => {
-  const dataURI = makeImage(file);
+export const download = (dataURI: string, fileName: string) => {
   const a = document.createElement('a');
   a.href = dataURI;
-  a.download = file.fileName;
+  a.download = fileName;
   a.click();
 };
 
-export default donwload;
+export const donwloadFile = (file: AcceptedFile) => {
+  const dataURI = makeImage(file);
+  download(dataURI, file.fileName);
+};

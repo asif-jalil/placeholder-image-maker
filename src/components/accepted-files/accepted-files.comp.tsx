@@ -3,7 +3,7 @@ import Image from 'next/image';
 import deleteIcon from '@/assets/images/delete.png';
 import downloadIcon from '@/assets/images/download.png';
 import rightArrowIcon from '@/assets/images/right-arrow.png';
-import donwload from '@/utils/download';
+import { donwloadFile } from '@/utils/download';
 import getTypeBadge from '@/utils/get-type-badge';
 
 import Badge from '../badge/badge.comp';
@@ -13,7 +13,7 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
   if (!acceptedFiles.length) return null;
 
   const handleDownload = (file: AcceptedFile) => {
-    donwload(file);
+    donwloadFile(file);
   };
 
   return (
