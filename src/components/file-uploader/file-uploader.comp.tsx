@@ -53,7 +53,7 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
   const { getRootProps, getInputProps } = useDropzone({
     multiple: true,
     maxSize: 5000000,
-    maxFiles: 10,
+    maxFiles: 100,
     onDropAccepted,
     onDropRejected,
     accept
@@ -82,9 +82,9 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
           <h3 className='text-3xl font-semibold text-slate-300 group-hover:text-slate-400 mb-3'>
             Drop your files here...
           </h3>
-          <h4 className='text-slate-300 group-hover:text-slate-400 mb-3'>(jpg, jpeg, png, gif accepted)</h4>
+          <h4 className='text-slate-300 group-hover:text-slate-400 mb-3'>(jpg, jpeg, png, svg, bmp, webp accepted)</h4>
           <h4 className='text-slate-300 group-hover:text-slate-400 mb-1'>Maximum file size: 5MB</h4>
-          <h4 className='text-slate-300 group-hover:text-slate-400'>Maximum files: 10</h4>
+          <h4 className='text-slate-300 group-hover:text-slate-400'>Maximum files: 100</h4>
         </div>
       </div>
     </div>

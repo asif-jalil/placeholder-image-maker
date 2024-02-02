@@ -28,7 +28,11 @@ const Home = () => {
 
   return (
     <div className='container mx-auto'>
-      <FileUploader onSelect={onSelect} onReject={onReject} accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.gif'] }} />
+      <FileUploader
+        onSelect={onSelect}
+        onReject={onReject}
+        accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.svg', '.bmp', '.webp'] }}
+      />
       <RejectedFiles rejectedFiles={rejectedFiles} />
       <AcceptedFiles acceptedFiles={acceptedFiles} onDelete={onDelete} />
       <Footer />

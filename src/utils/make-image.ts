@@ -1,5 +1,7 @@
 import { AcceptedFile } from '@/components/files/accepted-files.types';
 
+import { Format, ImageFormatType } from './image-format';
+
 const makeImage = (file: AcceptedFile) => {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d') as CanvasRenderingContext2D;
@@ -33,7 +35,28 @@ const makeImage = (file: AcceptedFile) => {
 
   context.fillText(text, centerX, centerY);
 
-  const dataURI = canvas.toDataURL();
+  const type = ImageFormatType[file.type];
+
+  let dataURI = canvas.toDataURL(type);
+
+  if (file.type === Format.SVG) {
+    const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgElement.setAttribute('width', file.width.toString());
+    svgElement.setAttribute('height', file.height.toString());
+
+    const imgElement = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+    imgElement.setAttribute('x', '0');
+    imgElement.setAttribute('y', '0');
+    imgElement.setAttribute('width', file.width.toString());
+    imgElement.setAttribute('height', file.height.toString());
+    imgElement.setAttribute('href', canvas.toDataURL());
+
+    svgElement.appendChild(imgElement);
+
+    const svgSource = new XMLSerializer().serializeToString(svgElement);
+
+    dataURI = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgSource)}`;
+  }
 
   return dataURI;
 };
