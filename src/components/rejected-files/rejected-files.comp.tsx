@@ -17,7 +17,7 @@ const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
       {rejectedFiles.map((file) => (
         <div key={file.previewSrc} className='flex justify-between p-2 shadow mb-3 bg-white rounded-lg'>
           <div className='flex'>
-            <div className='w-[50px] h-[50px] me-3'>
+            <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] me-3'>
               <Image
                 src={file.previewSrc}
                 alt={file.name}
@@ -26,8 +26,8 @@ const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
                 className='object-cover rounded inline-block h-full w-full'
               />
             </div>
-            <div>
-              <h4 className='text-sm font-semibold mb-1'>
+            <div className='hidden sm:block'>
+              <h4 className='text-sm font-semibold md:mb-1'>
                 <Truncate text={[file.name, file.extension].join('.')} />
               </h4>
               <Badge bg={getTypeBadge(file.type)}>{file.type}</Badge>
@@ -38,7 +38,7 @@ const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
               <p className='text-sm font-semibold'>Error</p>
               <p className='text-xs'>{file.error}</p>
             </div>
-            <div className=' bg-red-100 p-2 w-[50px] h-[50px] rounded flex justify-center items-center'>
+            <div className=' bg-red-100 p-2 w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded flex justify-center items-center'>
               <Image src={warningIcon} alt='warning' width={30} height={30} />
             </div>
           </div>

@@ -4,11 +4,12 @@ import classNames from 'classnames';
 
 import { ButtonProps } from './button.types';
 
-const Button = ({ children, bg = 'green', onClick }: ButtonProps) => (
+const Button = ({ children, bg = 'green', onClick, className }: ButtonProps) => (
   <button
     onClick={onClick}
     className={classNames(
-      'rounded px-3.5 py-2.5 text-sm font-semibold  shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+      'rounded px-3.5 py-2.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 flex items-center justify-center',
+      className,
       {
         'bg-blue-600 text-white hover:bg-blue-500 focus-visible:outline-blue-600': bg === 'blue',
         'bg-emerald-600 text-white hover:bg-emerald-500 focus-visible:outline-emerald-600': bg === 'green',

@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
 
+import Image from 'next/image';
+
+import deleteIcon from '@/assets/images/delete-white.png';
 import byteToMb from '@/utils/byte-to-mb';
 
 import Badge from '../badge/badge.comp';
@@ -14,13 +17,14 @@ const RejectedAction = ({ rejectedFiles = [], onClear }: RejectedActionProps) =>
   return (
     <div className='flex justify-between gap-3 p-3 bg-red-200 rounded-t-lg'>
       <div className='flex items-center'>
-        <Badge className='me-3 px-3 text-base' bg='red'>
+        <Badge className='me-3 px-3 text-[12px] sm:text-base' bg='red'>
           {byteToMb(totalSize)}MB
         </Badge>
-        <p className='text-lg font-semibold text-red-700'>Total failed</p>
+        <p className='text-base sm:text-lg font-semibold text-red-700'>Total failed</p>
       </div>
       <Button onClick={onClear} bg='red'>
-        Clear all
+        <Image src={deleteIcon} alt='Clear all' width={18} height={18} className='inline sm:hidden md:inline md:me-2' />{' '}
+        <span className='hidden sm:inline'>Clear all</span>
       </Button>
     </div>
   );
