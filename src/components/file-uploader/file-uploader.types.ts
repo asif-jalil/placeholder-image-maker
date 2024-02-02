@@ -1,5 +1,5 @@
-import { AcceptedFile } from '../files/accepted-files.types';
-import { RejectedFile } from '../files/rejected-files.types';
+import { AcceptedFile } from '../accepted-files/accepted-files.types';
+import { RejectedFile } from '../rejected-files/rejected-files.types';
 
 export type FileUploaderProps = {
   onSelect: (file: AcceptedFile) => void;

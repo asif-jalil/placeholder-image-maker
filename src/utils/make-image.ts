@@ -1,4 +1,4 @@
-import { AcceptedFile } from '@/components/files/accepted-files.types';
+import { AcceptedFile } from '@/components/accepted-files/accepted-files.types';
 
 import { Format, ImageFormatType } from './image-format';
 

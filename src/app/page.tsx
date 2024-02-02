@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 
-import AcceptedAction from '@/components/action/accepted-action.comp';
-import RejectedAction from '@/components/action/rejected-action.comp';
+import AcceptedAction from '@/components/accepted-files/accepted-action.comp';
+import AcceptedFiles from '@/components/accepted-files/accepted-files.comp';
+import { AcceptedFile } from '@/components/accepted-files/accepted-files.types';
 import FileUploader from '@/components/file-uploader/file-uploader.comp';
-import AcceptedFiles from '@/components/files/accepted-files.comp';
-import { AcceptedFile } from '@/components/files/accepted-files.types';
-import RejectedFiles from '@/components/files/rejected-files.comp';
-import { RejectedFile } from '@/components/files/rejected-files.types';
 import Footer from '@/components/footer/footer.comp';
+import RejectedAction from '@/components/rejected-files/rejected-action.comp';
+import RejectedFiles from '@/components/rejected-files/rejected-files.comp';
+import { RejectedFile } from '@/components/rejected-files/rejected-files.types';
 
 const Home = () => {
   const [acceptedFiles, setAcceptedFiles] = useState<AcceptedFile[]>([]);
