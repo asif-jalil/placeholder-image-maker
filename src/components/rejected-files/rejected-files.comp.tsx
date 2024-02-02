@@ -6,6 +6,7 @@ import warningIcon from '@/assets/images/warning.png';
 import getTypeBadge from '@/utils/get-type-badge';
 
 import Badge from '../badge/badge.comp';
+import Truncate from '../truncate/truncate.comp';
 import { RejectedFilesProps } from './rejected-files.types';
 
 const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
@@ -26,7 +27,9 @@ const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
               />
             </div>
             <div>
-              <h4 className='text-sm font-semibold mb-1'>{[file.name, file.extension].join('.')}</h4>
+              <h4 className='text-sm font-semibold mb-1'>
+                <Truncate text={[file.name, file.extension].join('.')} />
+              </h4>
               <Badge bg={getTypeBadge(file.type)}>{file.type}</Badge>
             </div>
           </div>

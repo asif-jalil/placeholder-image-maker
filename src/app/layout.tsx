@@ -1,9 +1,8 @@
-import React from 'react';
-
 import type { Metadata } from 'next';
 import { Kumbh_Sans } from 'next/font/google';
 
 import icon from '@/assets/images/icon.png';
+import Tooptip from '@/components/tooltip/tooltip.comp';
 
 import '../assets/styles/globals.css';
 
@@ -28,6 +27,7 @@ const RootLayout = ({
   <html lang='en'>
     <body>
       <main className={`${kumbhSans.variable} font-kumbh-sans pt-16 pb-8`}>{children}</main>
+      <Tooptip />
     </body>
   </html>
 );

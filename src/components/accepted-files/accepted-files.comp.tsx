@@ -7,6 +7,7 @@ import { donwloadFile } from '@/utils/download';
 import getTypeBadge from '@/utils/get-type-badge';
 
 import Badge from '../badge/badge.comp';
+import Truncate from '../truncate/truncate.comp';
 import { AcceptedFile, AcceptedFilesProps } from './accepted-files.types';
 
 const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => {
@@ -48,7 +49,9 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
               </div>
             </div>
             <div className='me-4 w-[300px]'>
-              <h4 className='text-sm font-semibold mb-1'>{[file.name, file.extension].join('.')}</h4>
+              <h4 className='text-sm font-semibold mb-1'>
+                <Truncate text={[file.name, file.extension].join('.')} />
+              </h4>
               <Badge bg={getTypeBadge(file.type)}>{file.type}</Badge>
             </div>
           </div>
