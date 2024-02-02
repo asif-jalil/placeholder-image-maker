@@ -4,7 +4,7 @@ export type AcceptedFile = {
   extension?: string;
   height: number;
   width: number;
-  oldPreviewSrc: string;
+  previewSrc: string;
   fileName: string;
 };
 

@@ -26,7 +26,7 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
             extension: file.name.split('.').pop(),
             height: img.height,
             width: img.width,
-            oldPreviewSrc: URL.createObjectURL(file)
+            previewSrc: URL.createObjectURL(file)
           };
 
           onSelect(info);
