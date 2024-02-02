@@ -1,7 +1,9 @@
+import { Format } from '@/utils/image-format';
+
 export type AcceptedFile = {
   id: number;
   size: number;
-  type: string;
+  type: Format;
   extension?: string;
   height: number;
   width: number;

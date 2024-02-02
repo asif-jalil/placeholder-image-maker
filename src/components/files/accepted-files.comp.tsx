@@ -3,8 +3,10 @@ import Image from 'next/image';
 import deleteIcon from '@/assets/images/delete.png';
 import downloadIcon from '@/assets/images/download.png';
 import rightArrowIcon from '@/assets/images/right-arrow.png';
+import getTypeBadge from '@/utils/get-type-badge';
 import makeImage from '@/utils/make-image';
 
+import Badge from '../badge/badge.comp';
 import { AcceptedFile, AcceptedFilesProps } from './accepted-files.types';
 
 const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => {
@@ -51,9 +53,7 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
             </div>
             <div className='me-4'>
               <h4 className='text-sm font-semibold mb-1'>{file.fileName}</h4>
-              <span className='inline-flex items-center rounded bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 uppercase'>
-                {file.type || 'invalid'}
-              </span>
+              <Badge bg={getTypeBadge(file.type)}>{file.type}</Badge>
             </div>
           </div>
 

@@ -1,10 +1,9 @@
-'use client';
-
 import { FileRejection, useDropzone } from 'react-dropzone';
 
 import Image from 'next/image';
 
 import icon from '@/assets/images/icon.png';
+import { ImageFormatType, getImageFormat } from '@/utils/image-format';
 
 import { FileUploaderProps } from './file-uploader.types';
 
@@ -23,7 +22,7 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
             id: Date.now(),
             fileName: file.name,
             size: file.size,
-            type: file.type.split('/')[1],
+            type: getImageFormat(file.type as ImageFormatType),
             extension: file.name.split('.').pop(),
             height: img.height,
             width: img.width,
@@ -46,7 +45,7 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
       previewSrc: URL.createObjectURL(file.file),
       fileName: file.file.name,
       error: file.errors[0].message,
-      type: file.file.type.split('/')[1]
+      type: getImageFormat(file.file.type as ImageFormatType)
     }));
     onReject(formattedFiles);
   };

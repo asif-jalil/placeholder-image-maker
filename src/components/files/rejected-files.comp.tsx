@@ -3,7 +3,9 @@ import React from 'react';
 import Image from 'next/image';
 
 import warningIcon from '@/assets/images/warning.png';
+import getTypeBadge from '@/utils/get-type-badge';
 
+import Badge from '../badge/badge.comp';
 import { RejectedFilesProps } from './rejected-files.types';
 
 const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
@@ -25,9 +27,7 @@ const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
             </div>
             <div>
               <h4 className='text-sm font-semibold mb-1'>{file.fileName}</h4>
-              <span className='inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 uppercase'>
-                {file.type || 'invalid'}
-              </span>
+              <Badge bg={getTypeBadge(file.type)}>{file.type}</Badge>
             </div>
           </div>
           <div className='flex items-start'>
