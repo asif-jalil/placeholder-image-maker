@@ -20,6 +20,7 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
 
         img.onload = () => {
           const info = {
+            id: Date.now(),
             fileName: file.name,
             size: file.size,
             type: file.type.split('/')[1],
@@ -41,6 +42,7 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
 
   const onDropRejected = (files: FileRejection[]) => {
     const formattedFiles = files.map((file) => ({
+      id: Date.now(),
       previewSrc: URL.createObjectURL(file.file),
       fileName: file.file.name,
       error: file.errors[0].message,

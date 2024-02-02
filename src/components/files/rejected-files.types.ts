@@ -3,6 +3,7 @@ export type RejectedFilesProps = {
 };
 
 export type RejectedFile = {
+  id: number;
   fileName: string;
   error: string;
   previewSrc: string;

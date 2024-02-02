@@ -1,4 +1,5 @@
 export type AcceptedFile = {
+  id: number;
   size: number;
   type: string;
   extension?: string;
@@ -10,5 +11,5 @@ export type AcceptedFile = {
 
 export type AcceptedFilesProps = {
   acceptedFiles: AcceptedFile[];
-  onDelete: (fileName: string) => void;
+  onDelete: (id: number | string) => void;
 };

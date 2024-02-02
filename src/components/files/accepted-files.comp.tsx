@@ -65,7 +65,7 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
               <Image src={downloadIcon} alt='download' width={24} height={24} />
             </button>
             <button
-              onClick={() => onDelete(file.fileName)}
+              onClick={() => onDelete(file.id)}
               className='bg-red-100 p-2 w-[50px] h-[50px] rounded flex justify-center items-center'
             >
               <Image src={deleteIcon} alt='delete' width={22} height={22} />

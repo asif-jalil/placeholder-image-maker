@@ -21,11 +21,16 @@ const Home = () => {
     setAcceptedFiles((prev) => [...prev, file]);
   };
 
+  const onDelete = (id: string | number) => {
+    const files = acceptedFiles.filter((file) => file.id !== id);
+    setAcceptedFiles(files);
+  };
+
   return (
     <div className='container mx-auto'>
       <FileUploader onSelect={onSelect} onReject={onReject} accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.gif'] }} />
       <RejectedFiles rejectedFiles={rejectedFiles} />
-      <AcceptedFiles acceptedFiles={acceptedFiles} onDelete={() => console.log('deleted')} />
+      <AcceptedFiles acceptedFiles={acceptedFiles} onDelete={onDelete} />
       <Footer />
     </div>
   );
