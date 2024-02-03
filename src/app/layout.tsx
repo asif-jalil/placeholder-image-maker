@@ -3,6 +3,8 @@ import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import { Kumbh_Sans } from 'next/font/google';
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import icon from '@/assets/images/icon.png';
 import Tooptip from '@/components/tooltip/tooltip.comp';
 
@@ -31,6 +33,7 @@ const RootLayout = ({
       <main className={`${kumbhSans.variable} font-kumbh-sans pt-16 pb-8`}>{children}</main>
       <Tooptip />
       <Analytics />
+      <SpeedInsights />
     </body>
   </html>
 );
