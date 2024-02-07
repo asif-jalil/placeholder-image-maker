@@ -25,6 +25,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-tooltip": "^5.26.0",
+    "sharp": "^0.33.2",
     "validate-color": "^2.2.4"
   },
   "devDependencies": {

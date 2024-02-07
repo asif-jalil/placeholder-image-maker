@@ -5,7 +5,7 @@ const getTypeBadge = (type: Format) => {
     return 'blue';
   }
 
-  if (type === Format.GIF) {
+  if (type === Format.BMP) {
     return 'gray';
   }
 
