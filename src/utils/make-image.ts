@@ -2,14 +2,22 @@ import { AcceptedFile } from '@/components/accepted-files/accepted-files.types';
 
 import { Format, ImageFormatType } from './image-format';
 
-const makeImage = (file: AcceptedFile) => {
+export type MakeImageType = {
+  bgColor?: string;
+  textColor?: string;
+  caption?: string;
+} & Omit<AcceptedFile, 'id' | 'size' | 'previewSrc'>;
+
+const makeImage = (file: MakeImageType) => {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d') as CanvasRenderingContext2D;
 
   canvas.width = file.width;
   canvas.height = file.height;
 
-  context.fillStyle = '#e2e8f0';
+  const bgColor = file.bgColor || '#e2e8f0';
+
+  context.fillStyle = bgColor;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   let widthFactor: number;
@@ -27,12 +35,13 @@ const makeImage = (file: AcceptedFile) => {
   context.textAlign = 'center';
   context.textBaseline = 'middle';
 
-  const text = `${file.width} x ${file.height}`;
-  context.fillStyle = '#000000';
+  const textColor = file.textColor || '#000000';
+  context.fillStyle = textColor;
 
   const centerX = canvas.width / 2;
   const centerY = canvas.height / 2;
 
+  const text = file.caption || [file.width, file.height].join(' x ');
   context.fillText(text, centerX, centerY);
 
   const type = ImageFormatType[file.type];

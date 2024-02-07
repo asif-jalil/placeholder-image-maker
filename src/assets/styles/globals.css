@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .input {
+    @apply block w-full min-w-0 flex-1 border-slate-300 py-1.5 text-gray-900 placeholder:text-slate-400 focus:ring focus:ring-emerald-100 focus:border-emerald-400 sm:text-sm sm:leading-6;
+  }
+
+  .color-input {
+    @apply border-0 outline-0 appearance-none bg-transparent cursor-pointer;
+  }
+
+  .color-input::-webkit-color-swatch {
+    @apply rounded-full border-0 shadow;
+  }
+
+  .color-input::-moz-color-swatch {
+    @apply rounded-full border-0 shadow;
+  }
+}

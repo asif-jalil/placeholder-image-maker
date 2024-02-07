@@ -1,6 +1,3 @@
 export type ButtonProps = {
-  children: React.ReactNode;
-  bg?: 'blue' | 'green' | 'red' | 'gray' | 'yellow';
-  onClick?: () => void;
-  className?: string;
-};
+  bg?: 'blue' | 'green' | 'red' | 'gray' | 'yellow' | 'light';
+} & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;

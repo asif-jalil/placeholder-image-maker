@@ -17,17 +17,20 @@
     "@vercel/analytics": "^1.1.2",
     "@vercel/speed-insights": "^1.0.9",
     "classnames": "^2.5.1",
+    "color": "^4.2.3",
+    "font-color-contrast": "^11.1.0",
     "jszip": "^3.10.1",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-tooltip": "^5.26.0",
-    "sharp": "^0.33.2"
+    "validate-color": "^2.2.4"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/color": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

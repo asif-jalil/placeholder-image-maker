@@ -22,6 +22,9 @@ const config: Config = {
           xl: '950px',
           '2xl': '950px'
         }
+      },
+      boxShadow: {
+        left: '-8px 10px 15px -3px rgb(0 0 0 / 0.1), -4px 4px 6px -4px rgb(0 0 0 / 0.1)'
       }
     }
   },

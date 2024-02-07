@@ -1,6 +1,4 @@
-import { AcceptedFile } from '@/components/accepted-files/accepted-files.types';
-
-import makeImage from './make-image';
+import makeImage, { MakeImageType } from './make-image';
 
 export const getFileName = (name: string, extension: string) => [name, extension].join('.');
 
@@ -11,7 +9,7 @@ export const download = (dataURI: string, fileName: string) => {
   a.click();
 };
 
-export const donwloadFile = (file: AcceptedFile) => {
+export const donwloadFile = (file: MakeImageType) => {
   const dataURI = makeImage(file);
   const fileName = getFileName(file.name, file.extension);
   download(dataURI, fileName);

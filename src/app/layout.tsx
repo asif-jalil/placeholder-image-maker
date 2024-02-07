@@ -30,7 +30,7 @@ const RootLayout = ({
 }>) => (
   <html lang='en'>
     <body>
-      <main className={`${kumbhSans.variable} font-kumbh-sans pt-16 pb-8`}>{children}</main>
+      <main className={`${kumbhSans.variable} font-kumbh-sans`}>{children}</main>
       <Tooptip />
       <Analytics />
       <SpeedInsights />
