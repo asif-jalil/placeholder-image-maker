@@ -96,6 +96,7 @@ export const GET = async (request: NextRequest, { params }: { params: { file: st
       }
     });
   } catch (error) {
+    // @ts-expect-error error type is not defined
     return NextResponse.json({ message: error.message as string }, { status: 400 });
   }
 };
