@@ -22,11 +22,13 @@
     "jszip": "^3.10.1",
     "next": "14.1.0",
     "react": "^18",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-tooltip": "^5.26.0",
     "sharp": "^0.33.2",
-    "validate-color": "^2.2.4"
+    "validate-color": "^2.2.4",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
@@ -34,6 +36,7 @@
     "@types/color": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-copy-to-clipboard": "^5.0.7",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
