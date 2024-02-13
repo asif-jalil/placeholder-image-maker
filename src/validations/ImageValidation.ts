@@ -27,8 +27,8 @@ export const ImageSizeValidation = z.object({
 });
 
 export const ImageParamsValidation = z.object({
-  background: colorType.optional().default('#ff00ff'),
-  textcolor: colorType.optional().default('#ffffff'),
+  background: colorType.optional().default('#e2e8f0'),
+  textcolor: colorType.optional().default('#000000'),
   text: z.string().max(50, { message: 'Maximum 50 characters are allowed' }).optional().default('Hello world!'),
   font: z
     .enum(['Arial', 'Helvetica', 'Georgia', 'Roboto', 'Open Sans', 'Segoe UI', 'Lato', 'Lora', 'Montserrat'])
