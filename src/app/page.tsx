@@ -51,7 +51,7 @@ const Home = () => {
           'lg:me-[350px] lg:rounded-e-xl': isCustomize
         })}
       >
-        <div className='container mx-auto pt-16 pb-8'>
+        <div className='container md:max-w-3xl lg:max-w-4xl mx-auto pt-16 pb-8'>
           <FileUploader
             onSelect={onSelect}
             onReject={onReject}
