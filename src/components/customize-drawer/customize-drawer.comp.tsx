@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { BiRevision } from 'react-icons/bi';
+import { BsCloudArrowDown } from 'react-icons/bs';
 
 import Image from 'next/image';
 
 import classNames from 'classnames';
 import fontColorContrast from 'font-color-contrast';
 
-import timesIcon from '@/assets/images/times.svg';
 import { donwloadFile } from '@/utils/download';
 import generateRandomColor from '@/utils/generate-random-color';
 import { Format } from '@/utils/image-format';
@@ -38,11 +39,6 @@ const CustomizeDrawer = ({ isCustomize, onClose }: CustomizeDrawerProps) => {
       textColor,
       caption
     });
-
-    const randomBgColor = generateRandomColor();
-    setBgColor(randomBgColor);
-    const cotrastTextColor = fontColorContrast(['#', randomBgColor].join('')); // '#00000
-    setTextColor(cotrastTextColor);
   };
 
   const handleReset = () => {
@@ -61,49 +57,65 @@ const CustomizeDrawer = ({ isCustomize, onClose }: CustomizeDrawerProps) => {
   };
 
   return (
-    <div
-      className={classNames(
-        'transition-[left] sm:transition-[right] duration-300 w-full sm:w-[350px] fixed top-0 p-5 h-screen overflow-y-auto bg-slate-50',
-        {
-          'left-0 sm:left-auto sm:right-0 sm:shadow-left lg:shadow-none': isCustomize,
-          'left-full sm:left-auto sm:right-[-350px]': !isCustomize
-        }
-      )}
-    >
-      <form onSubmit={handleDownload} onReset={handleReset}>
-        <div className='flex items-center justify-between mb-4'>
-          <SelectFormat imageFormat={imageFormat} onSelect={setImageFormat} />
-          <Button type='button' onClick={onClose} className='bg-transparent !px-2 !py-2 hover:bg-slate-200'>
-            <Image src={timesIcon as string} alt='close customization' width={20} height={20} />
-          </Button>
-        </div>
+    <div>
+      <form onSubmit={handleDownload} onReset={handleReset} className='px-2 space-y-14'>
+        <div className='space-y-5'>
+          <div className='bg-dark px-5 pb-5 rounded-2xl max-w-2xl mx-auto'>
+            <div className='py-3 text-white flex justify-between items-center'>
+              <h5>Preview</h5>
+              <div className='flex gap-2'>
+                <button
+                  type='submit'
+                  className='flex items-center gap-2 active:scale-95 transition-transform duration-75 bg-white hover:bg-gray-100 text-dark font-semibold text-xs px-3 md:px-5 py-2.5 rounded-xl'
+                >
+                  <BsCloudArrowDown className='text-lg' />
+                  <span className='sr-only md:not-sr-only'>Download</span>
+                </button>
+                <button
+                  type='reset'
+                  className='flex items-center gap-1 hover:underline text-xs active:scale-95 transition-transform duration-75 px-2 py-2.5 rounded-xl'
+                >
+                  <BiRevision className='text-lg -translate-y-0.5' />
+                  <span className='sr-only md:not-sr-only'>Reset to default</span>
+                </button>
+              </div>
+            </div>
+            <div
+              className='w-full h-60 flex justify-center items-center text-center text-xl border border-white/20 rounded-xl overflow-hidden'
+              style={{
+                backgroundColor: bgColor || '#e2e8f0',
+                color: textColor || '#000000',
+                fontFamily: 'poppins, sans-serif'
+              }}
+            >
+              {caption || [dimentions.width, dimentions.height].join(' x ') || 'Width x Height'}
+            </div>
+          </div>
 
-        <div className='shadow p-3 rounded-md bg-white mb-3'>
-          <h5 className='font-medium mb-3'>Preview</h5>
-          <div
-            className='w-full h-32 flex justify-center items-center text-center text-xl rounded-md overflow-hidden'
-            style={{
-              backgroundColor: bgColor || '#e2e8f0',
-              color: textColor || '#000000',
-              fontFamily: 'poppins, sans-serif'
-            }}
-          >
-            {caption || [dimentions.width, dimentions.height].join(' x ') || 'Width x Height'}
+          <SelectFormat imageFormat={imageFormat} onSelect={setImageFormat} />
+          <Dimention dimentions={dimentions} onChange={handleChangeDimention} />
+          <Caption text={caption} onChange={setCaption} />
+          <div className='grid grid-cols-2 gap-5'>
+            <BackgroundColor color={bgColor} onChange={setBgColor} />
+            <TextColor color={textColor} onChange={setTextColor} />
           </div>
         </div>
 
-        <Dimention dimentions={dimentions} onChange={handleChangeDimention} />
-        <BackgroundColor color={bgColor} onChange={setBgColor} />
-        <TextColor color={textColor} onChange={setTextColor} />
-        <Caption text={caption} onChange={setCaption} />
-
-        <div className='flex justify-between gap-3'>
-          <Button type='submit' className='w-full'>
-            Download
-          </Button>
-          <Button type='reset' bg='light' className='w-full'>
-            Reset
-          </Button>
+        <div className='flex justify-between gap-3 mt-10'>
+          <button
+            type='submit'
+            className='w-full flex justify-center items-center gap-2 active:scale-95 transition-transform duration-75 bg-dark hover:bg-dark/90 text-white font-semibold text-xs px-3 md:px-5 py-2 rounded-xl'
+          >
+            <BsCloudArrowDown className='text-lg' />
+            <span className='sr-only md:not-sr-only'>Download</span>
+          </button>
+          <button
+            type='reset'
+            className='w-full flex justify-center items-center gap-2 active:scale-95 transition-transform duration-75 bg-white border border-dark hover:bg-gray-100 font-semibold text-xs px-3 md:px-5 py-3 rounded-xl'
+          >
+            <BiRevision className='text-lg' />
+            <span className='sr-only md:not-sr-only'>Reset to default</span>
+          </button>
         </div>
       </form>
     </div>

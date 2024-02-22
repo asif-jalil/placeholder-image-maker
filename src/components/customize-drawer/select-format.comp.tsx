@@ -1,7 +1,10 @@
-import { Listbox, Transition } from '@headlessui/react';
+import { Listbox, RadioGroup, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import { BsCheckCircleFill } from 'react-icons/bs';
 
 import Image from 'next/image';
+
+import classNames from 'classnames';
 
 import checkIcon from '@/assets/images/check.svg';
 import chevronUpDownIcon from '@/assets/images/chevron-up-down.svg';
@@ -10,9 +13,54 @@ import { imageFormats } from '@/utils/image-format';
 
 import { FormatProps } from './select-format.types';
 
+const mailingLists = [
+  { id: 1, title: 'BMP' },
+  { id: 2, title: 'JPEG' },
+  { id: 3, title: 'PNG' },
+  { id: 4, title: 'SVG' },
+  { id: 5, title: 'WEBP' }
+];
+
 const SelectFormat = ({ imageFormat, onSelect }: FormatProps) => (
-  <div className='w-[180px]'>
-    <Listbox value={imageFormat} onChange={onSelect}>
+  <div>
+    <h5 className='font-medium mb-2'>Select type</h5>
+    <RadioGroup value={imageFormat} onChange={onSelect}>
+      <div className='grid gap-3 grid-cols-2 sm:grid-cols-5'>
+        {mailingLists.map((mailingList) => (
+          <RadioGroup.Option
+            key={mailingList.id}
+            value={mailingList.title.toLowerCase()}
+            className={({ active }) =>
+              classNames(
+                active ? 'border-dark ring-1 ring-dark' : 'border-gray-300',
+                'relative flex cursor-pointer rounded-xl border bg-white p-4 shadow-sm focus:outline-none active:scale-95 transition-transform'
+              )
+            }
+          >
+            {({ checked, active }) => (
+              <>
+                <RadioGroup.Label as='span' className='block flex-1 text-sm font-medium text-gray-900'>
+                  {mailingList.title}
+                </RadioGroup.Label>
+                <BsCheckCircleFill
+                  className={classNames(!checked ? 'invisible' : '', 'h-5 w-5 text-dark')}
+                  aria-hidden='true'
+                />
+                <span
+                  className={classNames(
+                    active ? 'border' : 'border-2',
+                    checked ? 'border-dark' : 'border-transparent',
+                    'pointer-events-none absolute -inset-px rounded-xl'
+                  )}
+                  aria-hidden='true'
+                />
+              </>
+            )}
+          </RadioGroup.Option>
+        ))}
+      </div>
+    </RadioGroup>
+    {/* <Listbox value={imageFormat} onChange={onSelect}>
       <div className='relative mt-1'>
         <Listbox.Button className='relative w-full cursor-pointer rounded-md bg-slate-200 py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>
           <div className='flex items-center'>
@@ -62,7 +110,7 @@ const SelectFormat = ({ imageFormat, onSelect }: FormatProps) => (
           </Listbox.Options>
         </Transition>
       </div>
-    </Listbox>
+    </Listbox> */}
   </div>
 );
 

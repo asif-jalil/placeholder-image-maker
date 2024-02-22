@@ -1,8 +1,7 @@
+import { BsCloudArrowDown, BsFillCaretRightFill, BsX } from 'react-icons/bs';
+
 import Image from 'next/image';
 
-import deleteIcon from '@/assets/images/delete.png';
-import downloadIcon from '@/assets/images/download.png';
-import rightArrowIcon from '@/assets/images/right-arrow.png';
 import { donwloadFile } from '@/utils/download';
 import getTypeBadge from '@/utils/get-type-badge';
 
@@ -18,9 +17,9 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
   };
 
   return (
-    <div className='bg-slate-100 pt-5 pb-3 px-3 rounded-b-lg'>
+    <div className='w-full border bg-white rounded-2xl overflow-y-auto no-scrollbar h-96'>
       {acceptedFiles.map((file) => (
-        <div key={file.previewSrc} className='flex justify-between p-2 shadow mb-3 bg-white rounded-lg'>
+        <div key={file.previewSrc} className='flex items-center justify-between p-3 border-b'>
           <div className='flex'>
             <div className='flex items-center me-4'>
               <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px]'>
@@ -29,21 +28,14 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
                   alt={file.name}
                   width={50}
                   height={50}
-                  className='object-cover rounded inline-block h-full w-full'
-                />
-              </div>
-              <div className='mx-1 md:mx-3'>
-                <Image
-                  src={rightArrowIcon}
-                  alt='convert'
-                  width={30}
-                  height={30}
-                  className='pointer-events-none select-none'
+                  className='object-cover border rounded-xl inline-block h-full w-full'
                 />
               </div>
 
+              <BsFillCaretRightFill className='text-xl pointer-events-none select-none mx-1 md:mx-3' />
+
               <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] select-none'>
-                <div className='w-full h-full bg-slate-200 rounded text-[7.5px] flex justify-center items-center text-center'>
+                <div className='w-full h-full bg-slate-200 rounded-xl border text-[7.5px] flex justify-center items-center text-center'>
                   {file.width} x {file.height}
                 </div>
               </div>
@@ -56,18 +48,20 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
             </div>
           </div>
 
-          <div className='flex items-start'>
+          <div className='flex items-start gap-3'>
             <button
               onClick={() => handleDownload(file)}
-              className='me-3 bg-emerald-100 p-2 w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded flex justify-center items-center'
+              className='border active:scale-95 transition-transform duration-75 hover:bg-gray-100 p-2 w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded-xl flex justify-center items-center'
             >
-              <Image src={downloadIcon} alt='download' width={24} height={24} />
+              <span className='sr-only'>Download file</span>
+              <BsCloudArrowDown className='text-xl' />
             </button>
             <button
               onClick={() => onDelete(file.id)}
-              className='bg-red-100 p-2 w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded flex justify-center items-center'
+              className='bg-dark hover:bg-dark/90 text-white active:scale-95 transition-transform duration-75 p-2 w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded-xl flex justify-center items-center'
             >
-              <Image src={deleteIcon} alt='delete' width={22} height={22} />
+              <span className='sr-only'>Delete file</span>
+              <BsX className='text-2xl' />
             </button>
           </div>
         </div>

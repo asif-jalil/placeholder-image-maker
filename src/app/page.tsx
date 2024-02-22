@@ -1,12 +1,10 @@
 'use client';
 
+import { Tab } from '@headlessui/react';
 import { useState } from 'react';
-
-import Image from 'next/image';
 
 import classNames from 'classnames';
 
-import editIcon from '@/assets/images/edit.svg';
 import AcceptedAction from '@/components/accepted-files/accepted-action.comp';
 import AcceptedFiles from '@/components/accepted-files/accepted-files.comp';
 import { AcceptedFile } from '@/components/accepted-files/accepted-files.types';
@@ -46,28 +44,51 @@ const Home = () => {
 
   return (
     <>
-      <div
-        className={classNames('transition-[margin] duration-300 border-t border-e border-b min-h-screen', {
-          'lg:me-[350px] lg:rounded-e-xl': isCustomize
-        })}
-      >
-        <div className='container md:max-w-3xl lg:max-w-4xl mx-auto pt-16 pb-8'>
-          <FileUploader
-            onSelect={onSelect}
-            onReject={onReject}
-            accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.svg', '.bmp', '.webp'] }}
-          />
-          <div className='mb-6'>
-            <RejectedAction rejectedFiles={rejectedFiles} onClear={onClearRejectedFiles} />
-            <RejectedFiles rejectedFiles={rejectedFiles} />
-          </div>
-          <div className='mb-6'>
-            <AcceptedAction acceptedFiles={acceptedFiles} />
-            <AcceptedFiles acceptedFiles={acceptedFiles} onDelete={onDelete} />
-          </div>
-          <Footer />
+      <div className='mx-auto max-w-5xl px-6 lg:px-8 py-10'>
+        <div className='space-y-10'>
+          <Tab.Group>
+            <Tab.List className='flex space-x-1 border border-gray-400 p-1 rounded-2xl'>
+              {['Generate from image', 'Create your own'].map((label) => (
+                <Tab
+                  key={label.toLowerCase().split(' ').join('-')}
+                  className={({ selected }) =>
+                    classNames(
+                      'flex-1 active:scale-95 transition-transform duration-75 rounded-xl py-2.5 text-sm font-medium leading-5 focus:outline-none',
+                      selected ? 'bg-dark text-white' : 'text-gray-400 hover:text-dark hover:bg-gray-100'
+                    )
+                  }
+                >
+                  {label}
+                </Tab>
+              ))}
+            </Tab.List>
+            <Tab.Panels>
+              <Tab.Panel>
+                <div className='space-y-10'>
+                  <FileUploader
+                    onSelect={onSelect}
+                    onReject={onReject}
+                    accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.svg', '.bmp', '.webp'] }}
+                  />
+                  {acceptedFiles.length || rejectedFiles.length ? (
+                    <div className='bg-dark overflow-hidden rounded-3xl'>
+                      <RejectedAction rejectedFiles={rejectedFiles} onClear={onClearRejectedFiles} />
+                      <RejectedFiles rejectedFiles={rejectedFiles} />
+                      <AcceptedAction acceptedFiles={acceptedFiles} />
+                      <AcceptedFiles acceptedFiles={acceptedFiles} onDelete={onDelete} />
+                    </div>
+                  ) : null}
+                </div>
+              </Tab.Panel>
+              <Tab.Panel>
+                <CustomizeDrawer isCustomize={true} />
+              </Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group>
         </div>
-        <div className='fixed right-5 bottom-5'>
+
+        <Footer />
+        {/* <div className='fixed right-5 bottom-5'>
           <Button
             bg='light'
             className={classNames('sm:transition-[margin] duration-300 !font-normal rounded-full shadow-lg', {
@@ -78,10 +99,10 @@ const Home = () => {
             <Image src={editIcon as string} width={13} height={13} className='me-2' alt='customize placeholder' />
             Customize placeholder
           </Button>
-        </div>
+        </div> */}
       </div>
 
-      <CustomizeDrawer isCustomize={isCustomize} onClose={() => setIsCustomize(false)} />
+      {/* <CustomizeDrawer isCustomize={isCustomize} onClose={() => setIsCustomize(false)} /> */}
     </>
   );
 };
