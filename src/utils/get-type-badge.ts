@@ -6,7 +6,7 @@ const getTypeBadge = (type: Format) => {
   }
 
   if (type === Format.BMP) {
-    return 'gray';
+    return 'slate';
   }
 
   if (type === Format.PNG) {

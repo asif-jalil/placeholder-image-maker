@@ -36,7 +36,7 @@ const BackgroundColor = ({ color, onChange }: BackgroundColorProps) => {
       <h5 className='font-medium mb-2'>Background color</h5>
       <div className='flex'>
         <div className='flex-1 rounded-l-xl px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-dark'>
-          <label htmlFor='bg-color' className='block justify-between text-xs font-medium text-gray-900'>
+          <label htmlFor='bg-color' className='block justify-between text-xs font-medium text-slate-900'>
             Hex value
             <input
               type='text'
@@ -45,11 +45,11 @@ const BackgroundColor = ({ color, onChange }: BackgroundColorProps) => {
               placeholder='#e2e8f0'
               name='bg-color'
               id='bg-color'
-              className='block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
+              className='block w-full border-0 p-0 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6'
             />
           </label>
         </div>
-        <span className='group hover:bg-gray-50 inline-flex items-center border border-l-0 border-gray-300 px-3 text-gray-500 sm:text-sm'>
+        <span className='group hover:bg-slate-50 inline-flex items-center border border-l-0 border-gray-300 px-3 text-slate-500 sm:text-sm'>
           <input
             type='color'
             value={pickerColor}
@@ -62,7 +62,7 @@ const BackgroundColor = ({ color, onChange }: BackgroundColorProps) => {
           data-tooltip-id='tooltip'
           data-tooltip-content='Surpirse me'
           onClick={handleSurprise}
-          className='group inline-flex items-center border border-l-0 rounded-none rounded-r-xl border-gray-300 hover:bg-gray-50 px-4 sm:text-sm'
+          className='group inline-flex items-center border border-l-0 rounded-none rounded-r-xl border-gray-300 hover:bg-slate-50 px-4 sm:text-sm'
         >
           <Image
             src={magicIcon as string}

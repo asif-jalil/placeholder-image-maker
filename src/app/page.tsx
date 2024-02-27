@@ -2,13 +2,15 @@
 
 import { Tab } from '@headlessui/react';
 import { useState } from 'react';
+import { FaGithub } from 'react-icons/fa';
+
+import Link from 'next/link';
 
 import classNames from 'classnames';
 
 import AcceptedAction from '@/components/accepted-files/accepted-action.comp';
 import AcceptedFiles from '@/components/accepted-files/accepted-files.comp';
 import { AcceptedFile } from '@/components/accepted-files/accepted-files.types';
-import Button from '@/components/button/button.comp';
 import CustomizeDrawer from '@/components/customize-drawer/customize-drawer.comp';
 import FileUploader from '@/components/file-uploader/file-uploader.comp';
 import Footer from '@/components/footer/footer.comp';
@@ -44,17 +46,35 @@ const Home = () => {
 
   return (
     <>
-      <div className='mx-auto max-w-5xl px-6 lg:px-8 py-10'>
+      <header className='relative mx-5 mt-5 rounded-2xl border bg-slate-50 h-96'>
+        <div className='relative flex items-center justify-center h-full'>
+          <div className='max-w-5xl mx-auto text-center px-5 space-y-5'>
+            <h1 className='lg:text-6xl text-5xl'>Placeholder maker</h1>
+            <p className='max-w-lg text-slate-500 text-sm lg:text-base'>
+              Generate a temporary image placeholder to use when submitting it to Themeforest or any other online
+              marketplace.
+            </p>
+            <Link
+              href='http://google.com'
+              target='_blank'
+              className='inline-flex gap-2 items-center px-5 py-1.5 border rounded-xl hover:bg-slate-100'
+            >
+              <FaGithub /> <span className='text-sm font-medium'>Github</span>
+            </Link>
+          </div>
+        </div>
+      </header>
+      <div className='relative mx-auto max-w-5xl px-6 lg:px-8 pb-10 -mt-[3.4rem] lg:-mt-[1.65rem]'>
         <div className='space-y-10'>
           <Tab.Group>
-            <Tab.List className='flex space-x-1 border border-gray-400 p-1 rounded-2xl'>
+            <Tab.List className='flex space-x-1 bg-white border p-1 rounded-2xl'>
               {['Generate from image', 'Create your own'].map((label) => (
                 <Tab
                   key={label.toLowerCase().split(' ').join('-')}
                   className={({ selected }) =>
                     classNames(
                       'flex-1 active:scale-95 transition-transform duration-75 rounded-xl py-2.5 text-sm font-medium leading-5 focus:outline-none',
-                      selected ? 'bg-dark text-white' : 'text-gray-400 hover:text-dark hover:bg-gray-100'
+                      selected ? 'bg-dark text-white' : 'text-slate-500 hover:text-dark hover:bg-slate-100'
                     )
                   }
                 >
@@ -68,8 +88,10 @@ const Home = () => {
                   <FileUploader
                     onSelect={onSelect}
                     onReject={onReject}
+                    filesOnQueue={!!acceptedFiles.length || !!rejectedFiles.length}
                     accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.svg', '.bmp', '.webp'] }}
                   />
+
                   {acceptedFiles.length || rejectedFiles.length ? (
                     <div className='bg-dark overflow-hidden rounded-3xl'>
                       <RejectedAction rejectedFiles={rejectedFiles} onClear={onClearRejectedFiles} />

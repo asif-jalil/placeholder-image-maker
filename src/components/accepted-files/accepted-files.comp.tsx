@@ -51,7 +51,7 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
           <div className='flex items-start gap-3'>
             <button
               onClick={() => handleDownload(file)}
-              className='border active:scale-95 transition-transform duration-75 hover:bg-gray-100 p-2 w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded-xl flex justify-center items-center'
+              className='border active:scale-95 transition-transform duration-75 hover:bg-slate-100 p-2 w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded-xl flex justify-center items-center'
             >
               <span className='sr-only'>Download file</span>
               <BsCloudArrowDown className='text-xl' />

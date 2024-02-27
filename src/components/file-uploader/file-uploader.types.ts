@@ -6,4 +6,5 @@ export type FileUploaderProps = {
   onReject: (files: RejectedFile[]) => void;
   accept: { [key: string]: string[] };
   disabled?: boolean;
+  filesOnQueue?: boolean;
 };

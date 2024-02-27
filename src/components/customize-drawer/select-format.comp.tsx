@@ -32,14 +32,14 @@ const SelectFormat = ({ imageFormat, onSelect }: FormatProps) => (
             value={mailingList.title.toLowerCase()}
             className={({ active }) =>
               classNames(
-                active ? 'border-dark ring-1 ring-dark' : 'border-gray-300',
-                'relative flex cursor-pointer rounded-xl border bg-white p-4 shadow-sm focus:outline-none active:scale-95 transition-transform'
+                active && 'border-dark ring-1 ring-dark',
+                'relative flex cursor-pointer rounded-xl border bg-white p-4 shadow-sm focus:outline-none active:scale-95 transition-transform duration-75'
               )
             }
           >
             {({ checked, active }) => (
               <>
-                <RadioGroup.Label as='span' className='block flex-1 text-sm font-medium text-gray-900'>
+                <RadioGroup.Label as='span' className='block flex-1 text-sm font-medium text-slate-900'>
                   {mailingList.title}
                 </RadioGroup.Label>
                 <BsCheckCircleFill
@@ -84,7 +84,7 @@ const SelectFormat = ({ imageFormat, onSelect }: FormatProps) => (
                 key={format}
                 className={({ active }) =>
                   `relative cursor-default select-none py-2 pl-10 pr-4 uppercase ${
-                    active ? 'bg-emerald-50 text-emerald-900' : 'text-gray-900'
+                    active ? 'bg-emerald-50 text-emerald-900' : 'text-slate-900'
                   }`
                 }
                 value={format}

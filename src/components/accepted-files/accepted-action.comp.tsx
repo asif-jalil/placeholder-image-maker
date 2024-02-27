@@ -18,12 +18,6 @@ const AcceptedAction = ({ acceptedFiles = [] }: AcceptedActionProps) => {
 
   if (!acceptedFiles.length) return null;
 
-  const handleDownloadAll = () => {
-    acceptedFiles.forEach((file) => {
-      donwloadFile(file);
-    });
-  };
-
   const handleDownloadAsZip = () => {
     const zip = new JSZip();
 
@@ -56,18 +50,11 @@ const AcceptedAction = ({ acceptedFiles = [] }: AcceptedActionProps) => {
         </h4>
         <div className='flex gap-2'>
           <button
-            onClick={handleDownloadAll}
-            className='flex items-center gap-2 border text-white hover:bg-white/5 active:scale-95 transition-transform duration-75 font-semibold text-xs px-3 md:px-5 py-2 rounded-xl'
+            onClick={handleDownloadAsZip}
+            className='flex items-center gap-2 active:scale-95 transition-transform duration-75 bg-white hover:bg-slate-100 text-dark font-semibold text-xs px-3 md:px-5 py-2 rounded-xl'
           >
             <BsCloudArrowDownFill className='text-lg' />
             <span className='sr-only md:not-sr-only'>Download all</span>
-          </button>
-          <button
-            onClick={handleDownloadAsZip}
-            className='flex items-center gap-2 active:scale-95 transition-transform duration-75 bg-white hover:bg-gray-100 text-dark font-semibold text-xs px-3 md:px-5 py-2 rounded-xl'
-          >
-            <BsFileEarmarkZipFill className='text-lg' />
-            <span className='sr-only md:not-sr-only'>Download as ZIP</span>
           </button>
           <button
             onClick={() => setIsCustomizing(!isCustomizing)}

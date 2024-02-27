@@ -2,12 +2,12 @@ import { FileRejection, useDropzone } from 'react-dropzone';
 
 import Image from 'next/image';
 
-import uploadIllustration from '@/assets/images/file-upload-illustration.png';
+import uploadIllustration from '@/assets/images/file-upload.png';
 import { ImageFormatType, getImageFormat } from '@/utils/image-format';
 
 import { FileUploaderProps } from './file-uploader.types';
 
-const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
+const FileUploader = ({ onSelect, accept, onReject, filesOnQueue }: FileUploaderProps) => {
   const onDropAccepted = (files: File[]) => {
     files?.forEach((file: File) => {
       const reader = new FileReader();
@@ -64,19 +64,20 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
   return (
     <div
       {...getRootProps({
-        className:
-          'group h-[30rem] p-5 border border-gray-400 hover:border-dark active:scale-[0.98] transition-transform duration-75 border-dashed hover:bg-gray-50 rounded-3xl cursor-pointer'
+        className: `group ${filesOnQueue ? 'h-auto' : 'h-[30rem]'} p-5 border border-gray-400 hover:border-dark active:scale-[0.98] transition-transform duration-75 border-dashed hover:bg-slate-50 rounded-3xl cursor-pointer`
       })}
     >
       <input {...getInputProps()} />
       <div className='flex flex-col items-center justify-center text-center h-full'>
-        <div className='flex mb-6'>
-          <Image src={uploadIllustration} height={250} alt='Upload' />
-        </div>
-        <h2 className='text-xl leading-7 text-gray-900'>Drop/Upload your files here</h2>
-        <p className='mt-1 text-sm leading-6 text-gray-600'>jpg, jpeg, png, svg, bmp, webp accepted</p>
-        <p className='mt-3 text-sm leading-6 text-gray-600'>Maximum file size: 5MB</p>
-        <p className='mt-1 text-sm leading-6 text-gray-600'>Maximum files: 100</p>
+        {!filesOnQueue && (
+          <div className='flex mb-6'>
+            <Image src={uploadIllustration} height={250} alt='Upload' />
+          </div>
+        )}
+        <h2 className='text-xl leading-7 text-slate-900'>Drop/Upload your files here</h2>
+        <p className='mt-1 text-sm leading-6 text-slate-600'>jpg, jpeg, png, svg, bmp, webp accepted</p>
+        <p className='mt-3 text-sm leading-6 text-slate-600'>Maximum file size: 5MB</p>
+        <p className='mt-1 text-sm leading-6 text-slate-600'>Maximum files: 100</p>
       </div>
     </div>
   );
