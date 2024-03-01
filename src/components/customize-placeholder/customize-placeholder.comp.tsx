@@ -107,7 +107,7 @@ const CustomizePlaceholder = () => {
               id='capiton'
             />
           </div>
-          <div className='grid grid-cols-2 gap-5'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
             <div>
               <h5 className='font-medium mb-2'>Background color</h5>
               <ColorInput
