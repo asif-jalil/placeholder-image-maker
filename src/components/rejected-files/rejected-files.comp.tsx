@@ -2,6 +2,8 @@ import React from 'react';
 
 import Image from 'next/image';
 
+import classNames from 'classnames';
+
 import warningIcon from '@/assets/images/warning.png';
 import getTypeBadge from '@/utils/get-type-badge';
 
@@ -13,9 +15,15 @@ const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
   if (!rejectedFiles.length) return null;
 
   return (
-    <div className='bg-red-50 pt-5 pb-3 px-3 rounded-b-lg'>
-      {rejectedFiles.map((file) => (
-        <div key={file.previewSrc} className='flex justify-between p-2 shadow mb-3 bg-white rounded-lg'>
+    <div className='relative w-full border border-red-200 bg-white rounded-t-2xl rounded-b-3xl overflow-y-auto no-scrollbar max-h-96'>
+      {rejectedFiles.map((file, index) => (
+        <div
+          key={file.previewSrc}
+          className={classNames({
+            'border-b border-red-200': index !== rejectedFiles.length - 1,
+            'flex items-center justify-between p-3': true
+          })}
+        >
           <div className='flex'>
             <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] me-3'>
               <Image
@@ -33,12 +41,12 @@ const RejectedFiles = ({ rejectedFiles = [] }: RejectedFilesProps) => {
               <Badge bg={getTypeBadge(file.type)}>{file.type}</Badge>
             </div>
           </div>
-          <div className='flex items-start'>
+          <div className='flex items-center'>
             <div className='me-3 text-end'>
               <p className='text-sm font-semibold'>Error</p>
               <p className='text-xs'>{file.error}</p>
             </div>
-            <div className=' bg-red-100 p-2 w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded flex justify-center items-center'>
+            <div className=' bg-red-100 p-2 w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded-xl flex justify-center items-center'>
               <Image src={warningIcon} alt='warning' width={30} height={30} />
             </div>
           </div>

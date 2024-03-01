@@ -1,19 +1,15 @@
-import { useMemo, useState } from 'react';
-import { BsChevronDown, BsCloudArrowDownFill, BsFileEarmarkZipFill } from 'react-icons/bs';
+import { useMemo } from 'react';
+import { BsCloudArrowDownFill, BsXLg } from 'react-icons/bs';
 
-import classNames from 'classnames';
 import JSZip from 'jszip';
 
 import byteToMb from '@/utils/byte-to-mb';
-import { donwloadFile, download, getFileName } from '@/utils/download';
+import { download, getFileName } from '@/utils/download';
 import makeImage from '@/utils/make-image';
 
-import Badge from '../badge/badge.comp';
-import Button from '../button/button.comp';
 import { AcceptedActionProps } from './accepted-action.types';
 
-const AcceptedAction = ({ acceptedFiles = [] }: AcceptedActionProps) => {
-  const [isCustomizing, setIsCustomizing] = useState(false);
+const AcceptedAction = ({ acceptedFiles = [], onClear }: AcceptedActionProps) => {
   const totalSize = useMemo(() => acceptedFiles.reduce((prev, curr) => prev + curr.size, 0), [acceptedFiles]);
 
   if (!acceptedFiles.length) return null;
@@ -57,23 +53,14 @@ const AcceptedAction = ({ acceptedFiles = [] }: AcceptedActionProps) => {
             <span className='sr-only md:not-sr-only'>Download all</span>
           </button>
           <button
-            onClick={() => setIsCustomizing(!isCustomizing)}
-            className='flex items-center gap-2 text-white hover:underline text-xs active:scale-95 transition-transform duration-75 px-3 md:px-5 py-3 rounded-xl'
+            onClick={onClear}
+            className='flex items-center gap-1 text-white hover:underline text-xs active:scale-95 transition-transform duration-75 px-3 md:px-5 py-3 rounded-xl'
           >
-            <span className='sr-only md:not-sr-only'>Customize</span>
-            <BsChevronDown className='text-sm' />
+            <BsXLg className='text-sm' />
+            <span className='sr-only md:not-sr-only'>Clear all</span>
           </button>
         </div>
       </div>
-      {/* <div
-        className={classNames({
-          'w-full bg-red-400 transition-height': true,
-          'h-0': !isCustomizing,
-          'h-20': isCustomizing
-        })}
-      >
-        Hello
-      </div> */}
     </div>
   );
 };

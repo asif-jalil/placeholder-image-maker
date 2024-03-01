@@ -31,3 +31,7 @@
     @apply rounded-full border-0 shadow;
   }
 }
+
+.react-tooltip {
+  border-radius: 0.5rem !important;
+}

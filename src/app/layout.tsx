@@ -31,9 +31,7 @@ const RootLayout = ({
 }>) => (
   <html lang='en'>
     <body>
-      <main className={`${kumbhSans.variable} font-kumbh-sans h-screen overflow-hidden`}>
-        <div className='relative h-full overflow-y-scroll bg-white'>{children}</div>
-      </main>
+      <main className={`${kumbhSans.variable} font-kumbh-sans`}>{children}</main>
       <Tooptip />
       <Analytics />
       <SpeedInsights />

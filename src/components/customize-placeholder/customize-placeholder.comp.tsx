@@ -1,32 +1,25 @@
 import React, { useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { BiRevision } from 'react-icons/bi';
-import { BsCloudArrowDown, BsCopy } from 'react-icons/bs';
-
-import Image from 'next/image';
-
-import classNames from 'classnames';
-import fontColorContrast from 'font-color-contrast';
+import { BsCheckLg, BsCloudArrowDown, BsCopy } from 'react-icons/bs';
 
 import { constructImageUrl } from '@/utils/construct-endpoint';
 import { donwloadFile } from '@/utils/download';
-import generateRandomColor from '@/utils/generate-random-color';
 import { Format } from '@/utils/image-format';
 
-import Button from '../button/button.comp';
 import BackgroundColor from './background-color.comp';
 import Caption from './caption.comp';
-import { CustomizeDrawerProps } from './customize-drawer.types';
 import Dimention from './dimention.comp';
 import SelectFormat from './select-format.comp';
 import TextColor from './text-color.comp';
 
-const CustomizeDrawer = ({ isCustomize, onClose }: CustomizeDrawerProps) => {
+const CustomizePlaceholder = () => {
   const [imageFormat, setImageFormat] = useState(Format.PNG);
   const [dimensions, setDimensions] = useState({ width: 400, height: 300 });
   const [bgColor, setBgColor] = useState('');
   const [textColor, setTextColor] = useState('');
   const [caption, setCaption] = useState('');
+  const [copied, setCopied] = useState(false);
 
   const handleDownload = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -58,10 +51,46 @@ const CustomizeDrawer = ({ isCustomize, onClose }: CustomizeDrawerProps) => {
     setDimensions((prev) => ({ ...prev, [key]: Number(value) }));
   };
 
+  const handleCopyToClipboard = () => {
+    setCopied(() => true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const imgUrl = constructImageUrl({
+    dimensions,
+    imageFormat,
+    background: bgColor,
+    textcolor: textColor,
+    text: caption
+  });
+
   return (
     <div>
       <form onSubmit={handleDownload} onReset={handleReset} className='px-2 space-y-14'>
         <div className='space-y-5'>
+          <SelectFormat imageFormat={imageFormat} onSelect={setImageFormat} />
+          <Dimention dimentions={dimensions} onChange={handleChangeDimention} />
+          <Caption text={caption} onChange={setCaption} />
+          <div className='grid grid-cols-2 gap-5'>
+            <BackgroundColor color={bgColor} onChange={setBgColor} />
+            <TextColor color={textColor} onChange={setTextColor} />
+          </div>
+          <div>
+            <h5 className='font-medium mb-2'>Image URL</h5>
+            <div className='flex gap-3 justify-between rounded-xl p-5 shadow-sm bg-slate-50 ring-1 ring-inset ring-gray-300'>
+              <h1 className='font-mono flex-1 [overflow-wrap:anywhere] text-sm'>{imgUrl}</h1>
+              <div
+                className='cursor-pointer translate-y-[2px]'
+                data-tooltip-id='tooltip'
+                data-tooltip-content={copied ? 'Copied!' : 'Copy'}
+                aria-disabled={copied}
+              >
+                <CopyToClipboard text={imgUrl} onCopy={handleCopyToClipboard}>
+                  {copied ? <BsCheckLg className='text-green-500 text-lg' /> : <BsCopy />}
+                </CopyToClipboard>
+              </div>
+            </div>
+          </div>
           {/* <div className='bg-dark px-5 pb-5 rounded-2xl max-w-2xl mx-auto'>
             <div className='py-3 text-white flex justify-between items-center'>
               <h5>Preview</h5>
@@ -90,46 +119,9 @@ const CustomizeDrawer = ({ isCustomize, onClose }: CustomizeDrawerProps) => {
                 fontFamily: 'poppins, sans-serif'
               }}
             >
-              {caption || [dimentions.width, dimentions.height].join(' x ') || 'Width x Height'}
+              {caption || [dimensions.width, dimensions.height].join(' x ') || 'Width x Height'}
             </div>
           </div> */}
-
-          <SelectFormat imageFormat={imageFormat} onSelect={setImageFormat} />
-          <Dimention dimentions={dimensions} onChange={handleChangeDimention} />
-          <Caption text={caption} onChange={setCaption} />
-          <div className='grid grid-cols-2 gap-5'>
-            <BackgroundColor color={bgColor} onChange={setBgColor} />
-            <TextColor color={textColor} onChange={setTextColor} />
-          </div>
-          <div>
-            <h5 className='font-medium mb-2'>API endpoint</h5>
-            <div className='flex gap-3 justify-between rounded-xl p-5 shadow-sm bg-slate-50 ring-1 ring-inset ring-gray-300'>
-              <h1 className='font-mono flex-1 [overflow-wrap:anywhere] text-sm'>
-                {constructImageUrl({
-                  dimensions,
-                  imageFormat,
-                  background: bgColor,
-                  color: textColor,
-                  text: caption
-                })}
-                {/* https://pimage.vercel.app/image/{dimensions.width}x{dimensions.height}.{imageFormat}?
-                {bgColor && `background=${bgColor}`}&{textColor && `color=${textColor}`} */}
-              </h1>
-              <div className='cursor-pointer' data-tooltip-id='tooltip' data-tooltip-content='Copy'>
-                <CopyToClipboard
-                  text={constructImageUrl({
-                    dimensions,
-                    imageFormat,
-                    background: bgColor,
-                    color: textColor,
-                    text: caption
-                  })}
-                >
-                  <BsCopy />
-                </CopyToClipboard>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className='flex justify-between gap-3 mt-10'>
@@ -153,4 +145,4 @@ const CustomizeDrawer = ({ isCustomize, onClose }: CustomizeDrawerProps) => {
   );
 };
 
-export default CustomizeDrawer;
+export default CustomizePlaceholder;

@@ -2,6 +2,8 @@ import { BsCloudArrowDown, BsFillCaretRightFill, BsX } from 'react-icons/bs';
 
 import Image from 'next/image';
 
+import classNames from 'classnames';
+
 import { donwloadFile } from '@/utils/download';
 import getTypeBadge from '@/utils/get-type-badge';
 
@@ -17,9 +19,15 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
   };
 
   return (
-    <div className='w-full border bg-white rounded-2xl overflow-y-auto no-scrollbar h-96'>
-      {acceptedFiles.map((file) => (
-        <div key={file.previewSrc} className='flex items-center justify-between p-3 border-b'>
+    <div className='relative w-full border bg-white rounded-t-2xl rounded-b-3xl overflow-y-auto no-scrollbar max-h-96'>
+      {acceptedFiles.map((file, index) => (
+        <div
+          key={file.previewSrc}
+          className={classNames({
+            'border-b': index !== acceptedFiles.length - 1,
+            'flex items-center justify-between p-3': true
+          })}
+        >
           <div className='flex'>
             <div className='flex items-center me-4'>
               <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px]'>
