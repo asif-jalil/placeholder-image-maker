@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { BiRevision } from 'react-icons/bi';
-import { BsCheckLg, BsCloudArrowDown, BsCopy } from 'react-icons/bs';
+import { BsCheckLg, BsCloudArrowDown, BsCopy, BsXLg } from 'react-icons/bs';
 
 import { constructImageUrl } from '@/utils/construct-endpoint';
 import { downloadFile } from '@/utils/download';
 import { Format } from '@/utils/image-format';
 
-import BackgroundColor from './background-color.comp';
-import Caption from './caption.comp';
-import Dimension from './dimension.comp';
+import ColorInput from '../input/color-input.comp';
+import TextInput from '../input/text-input.comp';
 import SelectFormat from './select-format.comp';
-import TextColor from './text-color.comp';
 
 const CustomizePlaceholder = () => {
   const [imageFormat, setImageFormat] = useState(Format.PNG);
-  const [dimensions, setDimensions] = useState({ width: 400, height: 300 });
+  const [dimension, setDimension] = useState({ width: 400, height: 300 });
   const [bgColor, setBgColor] = useState('');
   const [textColor, setTextColor] = useState('');
   const [caption, setCaption] = useState('');
@@ -27,8 +25,8 @@ const CustomizePlaceholder = () => {
     downloadFile({
       type: imageFormat,
       extension: imageFormat,
-      height: dimensions.height,
-      width: dimensions.width,
+      height: dimension.height,
+      width: dimension.width,
       name: 'placeholder',
       bgColor,
       textColor,
@@ -38,17 +36,16 @@ const CustomizePlaceholder = () => {
 
   const handleReset = () => {
     setImageFormat(Format.PNG);
-    setDimensions({ width: 400, height: 300 });
+    setDimension({ width: 400, height: 300 });
     setBgColor('');
     setTextColor('');
     setCaption('');
   };
 
   const handleChangeDimension = (key: 'width' | 'height', value: string) => {
-    // eslint-disable-next-line no-restricted-globals
-    if (isNaN(Number(value))) return;
+    if (Number.isNaN(Number(value))) return;
 
-    setDimensions((prev) => ({ ...prev, [key]: Number(value) }));
+    setDimension((prev) => ({ ...prev, [key]: Number(value) }));
   };
 
   const handleCopyToClipboard = () => {
@@ -56,24 +53,87 @@ const CustomizePlaceholder = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const imgUrl = constructImageUrl({
-    dimensions,
-    imageFormat,
-    background: bgColor,
-    textcolor: textColor,
-    text: caption
-  });
+  const imgUrl = useMemo(
+    () =>
+      constructImageUrl({
+        dimension,
+        imageFormat,
+        background: bgColor,
+        textcolor: textColor,
+        text: caption,
+        font: 'Arial', // todo: need to dynamic
+        weight: '600', // todo: need to dynamic
+        size: '100' // todo: need to dynamic
+      }),
+    [bgColor, caption, dimension, imageFormat, textColor]
+  );
 
   return (
     <div>
       <form onSubmit={handleDownload} onReset={handleReset} className='px-2 space-y-14'>
         <div className='space-y-5'>
           <SelectFormat imageFormat={imageFormat} onSelect={setImageFormat} />
-          <Dimension dimension={dimensions} onChange={handleChangeDimension} />
-          <Caption text={caption} onChange={setCaption} />
+          <div>
+            <h5 className='font-medium mb-2'>Dimension</h5>
+            <div className='flex gap-5 items-center'>
+              <TextInput
+                label='Width'
+                value={dimension.width.toString()}
+                onChange={(e) => handleChangeDimension('width', e.target.value)}
+                placeholder={dimension.width.toString()}
+                name='width'
+                id='width'
+              />
+              <BsXLg className='text-xl' />
+              <TextInput
+                label='Height'
+                value={dimension.height.toString()}
+                onChange={(e) => handleChangeDimension('height', e.target.value)}
+                placeholder={dimension.height.toString()}
+                name='height'
+                id='height'
+              />
+            </div>
+          </div>
+          <div>
+            <h5 className='font-medium mb-2'>Caption</h5>
+            <TextInput
+              label='Preview text'
+              showCounter
+              value={caption}
+              onChange={(e) => setCaption(e.target.value.slice(0, 50))}
+              placeholder='400x300'
+              name='capiton'
+              id='capiton'
+            />
+          </div>
           <div className='grid grid-cols-2 gap-5'>
-            <BackgroundColor color={bgColor} onChange={setBgColor} />
-            <TextColor color={textColor} onChange={setTextColor} />
+            <div>
+              <h5 className='font-medium mb-2'>Background color</h5>
+              <ColorInput
+                label='Hex value'
+                setRandomColor={(value) => setBgColor(value)}
+                value={bgColor}
+                defaultValue='#e2e8f0'
+                onChange={(e) => setBgColor(e.target.value)}
+                placeholder='#e2e8f0'
+                name='bg-color'
+                id='bg-color'
+              />
+            </div>
+            <div>
+              <h5 className='font-medium mb-2'>Text color</h5>
+              <ColorInput
+                label='Hex value'
+                setRandomColor={(value) => setTextColor(value)}
+                value={textColor}
+                defaultValue='#000000'
+                onChange={(e) => setTextColor(e.target.value)}
+                placeholder='#000000'
+                name='text-color'
+                id='text-color'
+              />
+            </div>
           </div>
           <div>
             <h5 className='font-medium mb-2'>Image URL</h5>

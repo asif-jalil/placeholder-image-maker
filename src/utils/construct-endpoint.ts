@@ -1,46 +1,36 @@
-interface ImageParams {
-  dimensions: {
-    width: number;
-    height: number;
-  };
-  imageFormat: string;
-  background?: string;
-  textcolor?: string;
-  text?: string;
-  weight?: string;
-  font?: string;
-}
+import { ConstructImageUrlType } from '@/types/image';
+
+import { isProduction } from './check-environment';
 
 export const constructImageUrl = ({
-  dimensions,
+  dimension,
   imageFormat,
   background,
   textcolor,
   text,
   weight,
-  font
-}: ImageParams): string => {
-  // Construct the base URL
-  const baseUrl = 'https://pimage.vercel.app/image/';
+  font,
+  size
+}: ConstructImageUrlType): string => {
+  const baseUrl = `${isProduction ? 'http://pimage.vercel.app' : 'http://localhost:3000'}/image/`;
 
-  // Construct the query parameters
   const queryParams: { [key: string]: string | undefined } = {
     background: background ? background.replace('#', '') : undefined,
     textcolor: textcolor ? textcolor.replace('#', '') : undefined,
     text,
     weight,
-    font
+    font,
+    size
   };
 
-  // Construct the URL
   let imageUrl = `${baseUrl}`;
 
-  if (dimensions.width > 0 && dimensions.height > 0) {
-    imageUrl += `${dimensions.width}x${dimensions.height}`;
-  } else if (dimensions.width > 0) {
-    imageUrl += `${dimensions.width}`;
-  } else if (dimensions.height > 0) {
-    imageUrl += `${dimensions.height}`;
+  if (dimension.width > 0 && dimension.height > 0) {
+    imageUrl += `${dimension.width}x${dimension.height}`;
+  } else if (dimension.width > 0) {
+    imageUrl += `${dimension.width}`;
+  } else if (dimension.height > 0) {
+    imageUrl += `${dimension.height}`;
   } else {
     imageUrl += '400x300';
   }
@@ -51,7 +41,6 @@ export const constructImageUrl = ({
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
 
-  // Append query parameters if they exist
   if (queryParamsString) {
     imageUrl += `?${queryParamsString}`;
   }

@@ -19,3 +19,17 @@ export type MakeImageType = {
   textColor?: string;
   caption?: string;
 } & Omit<AcceptedFile, 'id' | 'size' | 'previewSrc'>;
+
+export type ConstructImageUrlType = {
+  dimension: {
+    width: number;
+    height: number;
+  };
+  imageFormat: string;
+  background?: string;
+  textcolor?: string;
+  text?: string;
+  weight?: string;
+  font?: string;
+  size?: string;
+};

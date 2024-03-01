@@ -68,7 +68,7 @@ const Home = () => {
                   onSelect={onSelect}
                   onReject={onReject}
                   filesOnQueue={!!acceptedFiles.length || !!rejectedFiles.length}
-                  accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.svg', '.bmp', '.webp'] }}
+                  accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.svg', '.webp'] }}
                 />
                 {rejectedFiles.length ? (
                   <div className='bg-red-200 overflow-hidden rounded-3xl'>

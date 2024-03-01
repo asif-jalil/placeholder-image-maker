@@ -75,7 +75,7 @@ const FileUploader = ({ onSelect, accept, onReject, filesOnQueue }: FileUploader
           </div>
         )}
         <h2 className='text-xl leading-7 text-slate-900'>Drop/Upload your files here</h2>
-        <p className='mt-1 text-sm leading-6 text-slate-600'>jpg, jpeg, png, svg, bmp, webp accepted</p>
+        <p className='mt-1 text-sm leading-6 text-slate-600'>jpg, jpeg, png, svg, webp accepted</p>
         <p className='mt-3 text-sm leading-6 text-slate-600'>Maximum file size: 5MB</p>
         <p className='mt-1 text-sm leading-6 text-slate-600'>Maximum files: 100</p>
       </div>
