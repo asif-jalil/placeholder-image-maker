@@ -1,30 +1,13 @@
-import validateColor from 'validate-color';
 import { z } from 'zod';
 
-const colorType = z
-  .string()
-  .transform((value: string) => {
-    if (!validateColor(value)) {
-      return ['#', value].join('');
-    }
-    return value;
+import { checkNumberAsString, colorType, getDefaultDimension } from '@/utils/validation';
+
+export const ImageSizeValidation = z
+  .object({
+    width: checkNumberAsString('width'),
+    height: checkNumberAsString('height').optional()
   })
-  .refine((value: string) => validateColor(value), {
-    message: 'Invalid color format'
-  });
-
-const checkNumberAsString = (propertyName: string) =>
-  z
-    .string({ required_error: `${propertyName} is required` })
-    .refine((value: string) => !Number.isNaN(Number(value)), {
-      message: 'Invalid width'
-    })
-    .transform((value: string) => Number(value));
-
-export const ImageSizeValidation = z.object({
-  width: checkNumberAsString('width'),
-  height: checkNumberAsString('height').optional()
-});
+  .refine(getDefaultDimension);
 
 export const ImageParamsValidation = z.object({
   background: colorType.optional().default('#e2e8f0'),

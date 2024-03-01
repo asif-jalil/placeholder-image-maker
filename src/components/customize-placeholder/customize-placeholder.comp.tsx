@@ -4,12 +4,12 @@ import { BiRevision } from 'react-icons/bi';
 import { BsCheckLg, BsCloudArrowDown, BsCopy } from 'react-icons/bs';
 
 import { constructImageUrl } from '@/utils/construct-endpoint';
-import { donwloadFile } from '@/utils/download';
+import { downloadFile } from '@/utils/download';
 import { Format } from '@/utils/image-format';
 
 import BackgroundColor from './background-color.comp';
 import Caption from './caption.comp';
-import Dimention from './dimention.comp';
+import Dimension from './dimension.comp';
 import SelectFormat from './select-format.comp';
 import TextColor from './text-color.comp';
 
@@ -24,7 +24,7 @@ const CustomizePlaceholder = () => {
   const handleDownload = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    donwloadFile({
+    downloadFile({
       type: imageFormat,
       extension: imageFormat,
       height: dimensions.height,
@@ -44,7 +44,7 @@ const CustomizePlaceholder = () => {
     setCaption('');
   };
 
-  const handleChangeDimention = (key: 'width' | 'height', value: string) => {
+  const handleChangeDimension = (key: 'width' | 'height', value: string) => {
     // eslint-disable-next-line no-restricted-globals
     if (isNaN(Number(value))) return;
 
@@ -69,7 +69,7 @@ const CustomizePlaceholder = () => {
       <form onSubmit={handleDownload} onReset={handleReset} className='px-2 space-y-14'>
         <div className='space-y-5'>
           <SelectFormat imageFormat={imageFormat} onSelect={setImageFormat} />
-          <Dimention dimentions={dimensions} onChange={handleChangeDimention} />
+          <Dimension dimension={dimensions} onChange={handleChangeDimension} />
           <Caption text={caption} onChange={setCaption} />
           <div className='grid grid-cols-2 gap-5'>
             <BackgroundColor color={bgColor} onChange={setBgColor} />

@@ -1,5 +1,5 @@
-export type DimentionProps = {
-  dimentions: {
+export type DimensionProps = {
+  dimension: {
     width: number;
     height: number;
   };

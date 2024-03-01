@@ -1,4 +1,6 @@
-import makeImage, { MakeImageType } from './make-image';
+import { MakeImageType } from '@/types/image';
+
+import makeImage from './make-image';
 
 export const getFileName = (name: string, extension: string) => [name, extension].join('.');
 
@@ -9,7 +11,7 @@ export const download = (dataURI: string, fileName: string) => {
   a.click();
 };
 
-export const donwloadFile = (file: MakeImageType) => {
+export const downloadFile = (file: MakeImageType) => {
   const dataURI = makeImage(file);
   const fileName = getFileName(file.name, file.extension);
   download(dataURI, fileName);

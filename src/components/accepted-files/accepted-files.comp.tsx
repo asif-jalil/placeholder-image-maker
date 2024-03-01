@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import classNames from 'classnames';
 
-import { donwloadFile } from '@/utils/download';
+import { downloadFile } from '@/utils/download';
 import getTypeBadge from '@/utils/get-type-badge';
 
 import Badge from '../badge/badge.comp';
@@ -15,7 +15,7 @@ const AcceptedFiles = ({ acceptedFiles = [], onDelete }: AcceptedFilesProps) => 
   if (!acceptedFiles.length) return null;
 
   const handleDownload = (file: AcceptedFile) => {
-    donwloadFile(file);
+    downloadFile(file);
   };
 
   return (
