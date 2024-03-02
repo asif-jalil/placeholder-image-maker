@@ -7,6 +7,7 @@ import { Kumbh_Sans } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import icon from '@/assets/images/file-upload.png';
+import ogImage from '@/assets/images/ogimage.png';
 import Tooptip from '@/components/tooltip/tooltip.comp';
 
 import '../assets/styles/globals.css';
@@ -21,7 +22,35 @@ export const metadata: Metadata = {
   title: 'Placeholder Maker - Generate your placeholder image',
   description:
     'Generate a temporary image placeholder to use when submitting it to Themeforest or any other online marketplace.',
-  icons: icon.src
+  icons: icon.src,
+  openGraph: {
+    emails: 'asifjalil0@gmail.com',
+    phoneNumbers: '8801719836117',
+    title: 'Placeholder Maker - Generate your placeholder image',
+    description:
+      'Generate a temporary image placeholder to use when submitting it to Themeforest or any other online marketplace.',
+    images: ogImage.src
+  },
+  twitter: {
+    title: 'Placeholder Maker - Generate your placeholder image',
+    description:
+      'Generate a temporary image placeholder to use when submitting it to Themeforest or any other online marketplace.',
+    images: ogImage.src
+  },
+  creator: 'Asif Jalil',
+  keywords: [
+    'placeholder image',
+    'placeholder image maker',
+    'placeholder generator',
+    'image generator',
+    'placeholder maker'
+  ],
+  category: 'online tool',
+  authors: [
+    { name: 'Asif Jalil', url: 'https://www.linkedin.com/in/asifjalil0/' },
+    { name: 'Mostofa Nobi', url: 'https://www.linkedin.com/in/mostofanobi/' }
+  ],
+  metadataBase: new URL('https://picitify.vercel.app')
 };
 
 const RootLayout = ({

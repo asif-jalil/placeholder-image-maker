@@ -15,10 +15,6 @@
 }
 
 @layer components {
-  .input {
-    @apply block w-full min-w-0 flex-1 border-gray-300 py-1.5 text-slate-900 placeholder:text-slate-400 focus:ring focus:ring-emerald-100 focus:border-emerald-400 sm:text-sm sm:leading-6;
-  }
-
   .color-input {
     @apply border-0 outline-0 appearance-none bg-transparent cursor-pointer;
   }
