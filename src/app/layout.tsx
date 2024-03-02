@@ -4,11 +4,13 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import type { Metadata } from 'next';
 import { Kumbh_Sans } from 'next/font/google';
 
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import icon from '@/assets/images/file-upload.png';
 import ogImage from '@/assets/images/ogimage.png';
 import Tooptip from '@/components/tooltip/tooltip.comp';
+import { isProduction } from '@/utils/check-environment';
 
 import '../assets/styles/globals.css';
 
@@ -64,6 +66,7 @@ const RootLayout = ({
       <Tooptip />
       <Analytics />
       <SpeedInsights />
+      {isProduction && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID as string} />}
     </body>
   </html>
 );

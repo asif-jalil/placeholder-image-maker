@@ -12,7 +12,7 @@ export const constructImageUrl = ({
   font,
   size
 }: ConstructImageUrlType): string => {
-  const baseUrl = `${isProduction ? 'http://pimage.vercel.app' : 'http://localhost:3000'}/image/`;
+  const baseUrl = `${isProduction ? 'http://picseek.vercel.app' : 'http://localhost:3000'}/image/`;
 
   const queryParams: { [key: string]: string | undefined } = {
     background: background ? background.replace('#', '') : undefined,

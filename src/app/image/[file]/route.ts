@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { ga4Event } from '@/utils/GA-api';
 import { createImageBuffer, generateSvgContent, getContentType } from '@/utils/api-image';
 import { validateRequest } from '@/utils/validation';
 import { ImageParamsValidation, ImageSizeValidation } from '@/validations/ImageValidation';
@@ -27,6 +28,8 @@ export const GET = async (request: NextRequest, { params }: { params: { file: st
 
     const svgContent = generateSvgContent(validDimension, validOptions);
     const imageBuffer = await createImageBuffer(svgContent, format, validDimension, validOptions);
+
+    ga4Event('apiImage');
 
     return new NextResponse(imageBuffer, {
       status: 200,

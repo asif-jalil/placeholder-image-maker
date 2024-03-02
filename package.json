@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
+    "@next/third-parties": "^14.1.1",
     "@vercel/analytics": "^1.1.2",
     "@vercel/speed-insights": "^1.0.9",
+    "axios": "^1.6.7",
     "classnames": "^2.5.1",
     "color": "^4.2.3",
     "font-color-contrast": "^11.1.0",

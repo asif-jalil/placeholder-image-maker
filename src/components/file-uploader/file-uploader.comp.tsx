@@ -3,6 +3,7 @@ import { FileRejection, useDropzone } from 'react-dropzone';
 import Image from 'next/image';
 
 import uploadIllustration from '@/assets/images/file-upload.png';
+import ga from '@/utils/GA';
 import { ImageFormatType, getImageFormat } from '@/utils/image-format';
 
 import { FileUploaderProps } from './file-uploader.types';
@@ -52,10 +53,18 @@ const FileUploader = ({ onSelect, accept, onReject, filesOnQueue }: FileUploader
     onReject(formattedFiles);
   };
 
+  const onDrop = (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
+    const totalFile = acceptedFiles.length + rejectedFiles.length;
+    for (let i = 0; i < totalFile; i += 1) {
+      ga.upload();
+    }
+  };
+
   const { getRootProps, getInputProps } = useDropzone({
     multiple: true,
     maxSize: 5242880,
     maxFiles: 100,
+    onDrop,
     onDropAccepted,
     onDropRejected,
     accept

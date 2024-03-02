@@ -3,6 +3,7 @@ import { BsCloudArrowDownFill, BsXLg } from 'react-icons/bs';
 
 import JSZip from 'jszip';
 
+import ga from '@/utils/GA';
 import byteToMb from '@/utils/byte-to-mb';
 import { download, getFileName } from '@/utils/download';
 import makeImage from '@/utils/make-image';
@@ -35,6 +36,7 @@ const AcceptedAction = ({ acceptedFiles = [], onClear }: AcceptedActionProps) =>
     zip.generateAsync({ type: 'blob' }).then((blob) => {
       download(URL.createObjectURL(blob), 'placeholder-images.zip');
     });
+    ga.downloadZip();
   };
 
   return (

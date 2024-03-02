@@ -4,6 +4,7 @@ import { BiRevision } from 'react-icons/bi';
 import { BsCheckLg, BsCloudArrowDown, BsCopy, BsXLg } from 'react-icons/bs';
 
 import { AcceptedFont, AcceptedFontType, AcceptedFontWeight, AcceptedFontWeightType } from '@/types/image';
+import ga from '@/utils/GA';
 import { constructImageUrl } from '@/utils/construct-endpoint';
 import { downloadFile } from '@/utils/download';
 import { Format } from '@/utils/image-format';
@@ -51,6 +52,8 @@ const CustomizePlaceholder = ({ bgColor, setBgColor, textColor, setTextColor }: 
       weight: fontWeight?.value,
       size: fontSize
     });
+
+    ga.customDownload();
   };
 
   const handleReset = useCallback(() => {
