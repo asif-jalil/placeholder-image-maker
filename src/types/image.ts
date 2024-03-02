@@ -11,7 +11,7 @@ export type OptionsType = {
 
 export type DimensionType = {
   width: number;
-  height: number;
+  height?: number;
 };
 
 export type MakeImageType = {

@@ -6,9 +6,9 @@ import { ApiImageFormat } from './image-format';
 
 export const generateSvgContent = (validDimension: DimensionType, validOptions: OptionsType) => {
   const { width, height } = validDimension;
-  const fontSize = validOptions.size || Math.min(width < 200 ? width / 5 : width / 9, height / 2);
+  const fontSize = validOptions.size || Math.min(width < 200 ? width / 5 : width / 9, (height as number) / 2);
   const centerX = width / 2;
-  const centerY = height / 2 + (fontSize * 0.3) / 2;
+  const centerY = (height as number) / 2 + (fontSize * 0.3) / 2;
   const text = validOptions.text || [width, height].join(' x ');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
@@ -30,7 +30,7 @@ export const createImageBuffer = async (
   return sharp({
     create: {
       width: validDimension.width,
-      height: validDimension.height,
+      height: validDimension.height as number,
       channels: 4,
       background: validOptions.background as Color
     }
