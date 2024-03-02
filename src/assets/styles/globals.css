@@ -2,9 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  *,
+  ::before,
+  ::after {
+    @apply border-gray-300;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    @apply hidden;
+  }
+}
+
 @layer components {
   .input {
-    @apply block w-full min-w-0 flex-1 border-slate-300 py-1.5 text-gray-900 placeholder:text-slate-400 focus:ring focus:ring-emerald-100 focus:border-emerald-400 sm:text-sm sm:leading-6;
+    @apply block w-full min-w-0 flex-1 border-gray-300 py-1.5 text-slate-900 placeholder:text-slate-400 focus:ring focus:ring-emerald-100 focus:border-emerald-400 sm:text-sm sm:leading-6;
   }
 
   .color-input {
@@ -18,4 +30,8 @@
   .color-input::-moz-color-swatch {
     @apply rounded-full border-0 shadow;
   }
+}
+
+.react-tooltip {
+  border-radius: 0.5rem !important;
 }

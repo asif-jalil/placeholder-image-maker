@@ -5,10 +5,6 @@ const getTypeBadge = (type: Format) => {
     return 'blue';
   }
 
-  if (type === Format.BMP) {
-    return 'gray';
-  }
-
   if (type === Format.PNG) {
     return 'green';
   }
@@ -21,7 +17,7 @@ const getTypeBadge = (type: Format) => {
     return 'red';
   }
 
-  return 'blue';
+  return 'slate';
 };
 
 export default getTypeBadge;

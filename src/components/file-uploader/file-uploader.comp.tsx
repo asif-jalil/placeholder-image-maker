@@ -2,12 +2,12 @@ import { FileRejection, useDropzone } from 'react-dropzone';
 
 import Image from 'next/image';
 
-import icon from '@/assets/images/icon.png';
+import uploadIllustration from '@/assets/images/file-upload.png';
 import { ImageFormatType, getImageFormat } from '@/utils/image-format';
 
 import { FileUploaderProps } from './file-uploader.types';
 
-const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
+const FileUploader = ({ onSelect, accept, onReject, filesOnQueue }: FileUploaderProps) => {
   const onDropAccepted = (files: File[]) => {
     files?.forEach((file: File) => {
       const reader = new FileReader();
@@ -62,32 +62,22 @@ const FileUploader = ({ onSelect, accept, onReject }: FileUploaderProps) => {
   });
 
   return (
-    <div className='border-4 border-emerald-100 hover:border-emerald-200 border-dashed rounded-xl cursor-pointer group mb-6'>
-      <div {...getRootProps({ className: 'h-[550px] flex justify-center items-center' })}>
-        <div className='text-center'>
-          <input {...getInputProps()} />
-          <div className='text-center mb-16'>
-            <Image className='inline-block mb-5' width={100} src={icon} alt='placeholder image maker' />
-            <h1 className='font-bold mb-3'>
-              <span className='text-5xl sm:text-7xl text-emerald-500'>P</span>
-              <span className='text-2xl sm:text-5xl'>laceholder</span>
-              <span className='px-3' />
-              <span className='text-5xl sm:text-7xl text-emerald-500'>M</span>
-              <span className='text-2xl sm:text-5xl'>aker</span>
-            </h1>
-            <p className='text-slate-400 px-12'>
-              Generate a temporary image placeholder to use when submitting it to Themeforest or any other online
-              marketplace.
-            </p>
+    <div
+      {...getRootProps({
+        className: `group ${filesOnQueue ? 'h-auto' : 'h-[30rem]'} p-5 border border-gray-400 hover:border-dark active:scale-[0.98] transition-transform duration-75 border-dashed hover:bg-slate-50 rounded-3xl cursor-pointer`
+      })}
+    >
+      <input {...getInputProps()} />
+      <div className='flex flex-col items-center justify-center text-center h-full'>
+        {!filesOnQueue && (
+          <div className='flex mb-6'>
+            <Image src={uploadIllustration} height={250} alt='Upload' />
           </div>
-
-          <h3 className='text-xl sm:text-3xl font-semibold text-slate-300 group-hover:text-slate-400 mb-3'>
-            Drop your files here...
-          </h3>
-          <h4 className='text-slate-300 group-hover:text-slate-400 mb-3'>(jpg, jpeg, png, svg, bmp, webp accepted)</h4>
-          <h4 className='text-slate-300 group-hover:text-slate-400 mb-1'>Maximum file size: 5MB</h4>
-          <h4 className='text-slate-300 group-hover:text-slate-400'>Maximum files: 100</h4>
-        </div>
+        )}
+        <h2 className='text-xl leading-7 text-slate-900'>Drop/Upload your files here</h2>
+        <p className='mt-1 text-sm leading-6 text-slate-600'>jpg, jpeg, png, svg, webp accepted</p>
+        <p className='mt-3 text-sm leading-6 text-slate-600'>Maximum file size: 5MB</p>
+        <p className='mt-1 text-sm leading-6 text-slate-600'>Maximum files: 100</p>
       </div>
     </div>
   );

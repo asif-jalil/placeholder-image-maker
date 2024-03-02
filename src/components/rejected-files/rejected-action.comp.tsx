@@ -1,12 +1,8 @@
 import { useMemo } from 'react';
+import { BsX } from 'react-icons/bs';
 
-import Image from 'next/image';
-
-import deleteIcon from '@/assets/images/delete-white.png';
 import byteToMb from '@/utils/byte-to-mb';
 
-import Badge from '../badge/badge.comp';
-import Button from '../button/button.comp';
 import { RejectedActionProps } from './rejected-action.types';
 
 const RejectedAction = ({ rejectedFiles = [], onClear }: RejectedActionProps) => {
@@ -15,17 +11,20 @@ const RejectedAction = ({ rejectedFiles = [], onClear }: RejectedActionProps) =>
   if (!rejectedFiles.length) return null;
 
   return (
-    <div className='flex justify-between gap-3 p-3 bg-red-200 rounded-t-lg'>
-      <div className='flex items-center'>
-        <Badge className='me-3 px-3 text-[12px] sm:text-base' bg='red'>
-          {byteToMb(totalSize)}MB
-        </Badge>
-        <p className='text-base sm:text-lg font-semibold text-red-700'>Total failed</p>
+    <div className='p-3 h-auto rounded-2xl space-y-3'>
+      <div className='flex gap-5 flex-wrap justify-between items-center w-full'>
+        <h4 className='ml-3 text-red-500'>
+          <span className='font-semibold'>{byteToMb(totalSize)}MB </span>
+          <span className='sr-only sm:not-sr-only'>— Total failed</span>
+        </h4>
+        <button
+          onClick={onClear}
+          className='flex items-center gap-1 active:scale-95 transition-transform duration-75 bg-red-500 hover:bg-red-600 text-white font-semibold text-xs px-3 md:px-5 py-2.5 rounded-xl'
+        >
+          <BsX className='text-lg' />
+          <span className='sr-only md:not-sr-only'>Clear all</span>
+        </button>
       </div>
-      <Button onClick={onClear} bg='red'>
-        <Image src={deleteIcon} alt='Clear all' width={18} height={18} className='inline sm:hidden md:inline md:me-2' />{' '}
-        <span className='hidden sm:inline'>Clear all</span>
-      </Button>
     </div>
   );
 };

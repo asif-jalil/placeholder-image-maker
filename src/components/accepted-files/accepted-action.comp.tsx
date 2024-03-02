@@ -1,29 +1,18 @@
 import { useMemo } from 'react';
-
-import Image from 'next/image';
+import { BsCloudArrowDownFill, BsXLg } from 'react-icons/bs';
 
 import JSZip from 'jszip';
 
-import downloadIcon from '@/assets/images/download-white.png';
-import zipIcon from '@/assets/images/zip.png';
 import byteToMb from '@/utils/byte-to-mb';
-import { donwloadFile, download, getFileName } from '@/utils/download';
+import { download, getFileName } from '@/utils/download';
 import makeImage from '@/utils/make-image';
 
-import Badge from '../badge/badge.comp';
-import Button from '../button/button.comp';
 import { AcceptedActionProps } from './accepted-action.types';
 
-const AcceptedAction = ({ acceptedFiles = [] }: AcceptedActionProps) => {
+const AcceptedAction = ({ acceptedFiles = [], onClear }: AcceptedActionProps) => {
   const totalSize = useMemo(() => acceptedFiles.reduce((prev, curr) => prev + curr.size, 0), [acceptedFiles]);
 
   if (!acceptedFiles.length) return null;
-
-  const handleDownloadAll = () => {
-    acceptedFiles.forEach((file) => {
-      donwloadFile(file);
-    });
-  };
 
   const handleDownloadAsZip = () => {
     const zip = new JSZip();
@@ -49,32 +38,28 @@ const AcceptedAction = ({ acceptedFiles = [] }: AcceptedActionProps) => {
   };
 
   return (
-    <div className='flex justify-between gap-3 p-3 bg-slate-700 rounded-t-lg'>
-      <div className='flex items-center'>
-        <Badge className='me-2 sm:me-3 px-2 sm:px-3 text-[12px] sm:text-base'>{byteToMb(totalSize)}MB</Badge>
-        <p className='text-sm sm:text-lg font-semibold text-white'>Total processing</p>
-      </div>
-      <div className='flex gap-2 justify-between items-center'>
-        <Button onClick={handleDownloadAll}>
-          <Image
-            src={downloadIcon}
-            alt='Download all'
-            width={18}
-            height={18}
-            className='inline sm:hidden md:inline md:me-2'
-          />{' '}
-          <span className='hidden sm:inline'>Download all</span>
-        </Button>
-        <Button onClick={handleDownloadAsZip} bg='yellow'>
-          <Image
-            src={zipIcon}
-            alt='Download as ZIP'
-            width={18}
-            height={18}
-            className='inline sm:hidden md:inline md:me-2'
-          />{' '}
-          <span className='hidden sm:inline'>Download as ZIP</span>
-        </Button>
+    <div className='p-3 h-auto rounded-2xl space-y-3'>
+      <div className='flex gap-5 flex-wrap justify-between items-center w-full'>
+        <h4 className='ml-3 text-white'>
+          <span className='font-semibold'>{byteToMb(totalSize)}MB </span>
+          <span className='sr-only sm:not-sr-only'>— Total processing</span>
+        </h4>
+        <div className='flex gap-2'>
+          <button
+            onClick={handleDownloadAsZip}
+            className='flex items-center gap-2 active:scale-95 transition-transform duration-75 bg-white hover:bg-slate-100 text-dark font-semibold text-xs px-3 md:px-5 py-2 rounded-xl'
+          >
+            <BsCloudArrowDownFill className='text-lg' />
+            <span className='sr-only md:not-sr-only'>Download all</span>
+          </button>
+          <button
+            onClick={onClear}
+            className='flex items-center gap-1 text-white hover:underline text-xs active:scale-95 transition-transform duration-75 px-3 md:px-5 py-3 rounded-xl'
+          >
+            <BsXLg className='text-sm' />
+            <span className='sr-only md:not-sr-only'>Clear all</span>
+          </button>
+        </div>
       </div>
     </div>
   );

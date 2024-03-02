@@ -1,39 +1,22 @@
-import validateColor from 'validate-color';
 import { z } from 'zod';
 
-const colorType = z
-  .string()
-  .transform((value: string) => {
-    if (!validateColor(value)) {
-      return ['#', value].join('');
-    }
-    return value;
+import { checkNumberAsString, colorType, getDefaultDimension } from '@/utils/validation';
+
+export const ImageSizeValidation = z
+  .object({
+    width: checkNumberAsString('width'),
+    height: checkNumberAsString('height').optional()
   })
-  .refine((value: string) => validateColor(value), {
-    message: 'Invalid color format'
-  });
-
-const checkNumberAsString = (propertyName: string) =>
-  z
-    .string({ required_error: `${propertyName} is required` })
-    .refine((value: string) => !Number.isNaN(Number(value)), {
-      message: 'Invalid width'
-    })
-    .transform((value: string) => Number(value));
-
-export const ImageSizeValidation = z.object({
-  width: checkNumberAsString('width'),
-  height: checkNumberAsString('height').optional()
-});
+  .refine(getDefaultDimension);
 
 export const ImageParamsValidation = z.object({
   background: colorType.optional().default('#e2e8f0'),
   textcolor: colorType.optional().default('#000000'),
-  text: z.string().max(50, { message: 'Maximum 50 characters are allowed' }).optional().default('Hello world!'),
+  text: z.string().max(50, { message: 'Maximum 50 characters are allowed' }).optional(),
   font: z
     .enum(['Arial', 'Helvetica', 'Georgia', 'Roboto', 'Open Sans', 'Segoe UI', 'Lato', 'Lora', 'Montserrat'])
     .optional()
     .default('Arial'),
-  weight: z.enum(['100', '200', '300', '400', '500', '600', '700', '800', '900']).optional().default('600'),
+  weight: z.enum(['100', '200', '300', '400', '500', '600', '700', '800', '900']).optional().default('700'),
   size: checkNumberAsString('font size').optional()
 });
