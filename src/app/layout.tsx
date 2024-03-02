@@ -6,7 +6,7 @@ import { Kumbh_Sans } from 'next/font/google';
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-import icon from '@/assets/images/icon.png';
+import icon from '@/assets/images/file-upload.png';
 import Tooptip from '@/components/tooltip/tooltip.comp';
 
 import '../assets/styles/globals.css';
