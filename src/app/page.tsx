@@ -19,6 +19,8 @@ import { RejectedFile } from '@/components/rejected-files/rejected-files.types';
 const Home = () => {
   const [acceptedFiles, setAcceptedFiles] = useState<AcceptedFile[]>([]);
   const [rejectedFiles, setRejectedFiles] = useState<RejectedFile[]>([]);
+  const [bgColor, setBgColor] = useState('');
+  const [textColor, setTextColor] = useState('');
 
   const onReject = (list: RejectedFile[]) => {
     setRejectedFiles((prev) => [...prev, ...list]);
@@ -43,7 +45,7 @@ const Home = () => {
 
   return (
     <>
-      <Header />
+      <Header bgColor={bgColor} textColor={textColor} />
       <div className='relative mx-auto max-w-5xl space-y-10 px-6 lg:px-8 -mt-[3.4rem] lg:-mt-[1.65rem]'>
         <Tab.Group>
           <Tab.List className='flex space-x-1 bg-white border p-1 rounded-2xl'>
@@ -85,7 +87,12 @@ const Home = () => {
               </div>
             </Tab.Panel>
             <Tab.Panel className='focus-visible:outline-none'>
-              <CustomizePlaceholder />
+              <CustomizePlaceholder
+                bgColor={bgColor}
+                setBgColor={setBgColor}
+                textColor={textColor}
+                setTextColor={setTextColor}
+              />
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>

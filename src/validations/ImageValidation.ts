@@ -17,6 +17,6 @@ export const ImageParamsValidation = z.object({
     .enum(['Arial', 'Helvetica', 'Georgia', 'Roboto', 'Open Sans', 'Segoe UI', 'Lato', 'Lora', 'Montserrat'])
     .optional()
     .default('Arial'),
-  weight: z.enum(['100', '200', '300', '400', '500', '600', '700', '800', '900']).optional().default('600'),
+  weight: z.enum(['100', '200', '300', '400', '500', '600', '700', '800', '900']).optional().default('700'),
   size: checkNumberAsString('font size').optional()
 });
