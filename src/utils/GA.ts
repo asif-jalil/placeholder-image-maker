@@ -11,19 +11,19 @@ const ifEnabled =
   };
 
 const upload = () => {
-  sendGAEvent('event', 'upload');
+  sendGAEvent('event', 'upload', {});
 };
 
 const download = () => {
-  sendGAEvent('event', 'download');
+  sendGAEvent('event', 'download', {});
 };
 
 const downloadZip = () => {
-  sendGAEvent('event', 'downloadAll');
+  sendGAEvent('event', 'downloadAll', {});
 };
 
 const customDownload = () => {
-  sendGAEvent('event', 'customDownload');
+  sendGAEvent('event', 'customDownload', {});
 };
 
 const ga = {
