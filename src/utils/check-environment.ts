@@ -1,1 +1,1 @@
-export const isProduction = process.env.VERCEL_ENV === 'production';
+export const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
