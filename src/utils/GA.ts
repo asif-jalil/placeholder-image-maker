@@ -1,4 +1,4 @@
-import { sendGAEvent } from '@next/third-parties/google';
+import { event } from 'nextjs-google-analytics';
 
 import { isProduction } from './check-environment';
 
@@ -11,19 +11,19 @@ const ifEnabled =
   };
 
 const upload = () => {
-  sendGAEvent('event', 'upload', {});
+  event('upload');
 };
 
 const download = () => {
-  sendGAEvent('event', 'download', {});
+  event('download');
 };
 
 const downloadZip = () => {
-  sendGAEvent('event', 'downloadAll', {});
+  event('download_zip');
 };
 
 const customDownload = () => {
-  sendGAEvent('event', 'customDownload', {});
+  event('customize');
 };
 
 const ga = {

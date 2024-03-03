@@ -36,6 +36,7 @@ const AcceptedAction = ({ acceptedFiles = [], onClear }: AcceptedActionProps) =>
     zip.generateAsync({ type: 'blob' }).then((blob) => {
       download(URL.createObjectURL(blob), 'placeholder-images.zip');
     });
+
     ga.downloadZip();
   };
 

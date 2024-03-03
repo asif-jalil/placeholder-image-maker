@@ -50,7 +50,7 @@ const CustomizePlaceholder = ({ bgColor, setBgColor, textColor, setTextColor }: 
       caption,
       font: font?.value,
       weight: fontWeight?.value,
-      size: fontSize
+      fontsize: fontSize
     });
 
     ga.customDownload();

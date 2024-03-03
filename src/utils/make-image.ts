@@ -23,7 +23,7 @@ const makeImage = (imageConfig: MakeImageType) => {
     widthFactor = canvas.width / 9;
   }
 
-  const fontSize = imageConfig.size || Math.min(widthFactor, heightFactor);
+  const fontSize = imageConfig.fontsize || Math.min(widthFactor, heightFactor);
 
   context.font = `${imageConfig.weight || '700'} ${fontSize}px ${imageConfig.font || 'Arial'}`;
   context.textAlign = 'center';

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { isProduction } from './check-environment';
+import { getReqIpAddress } from './getReqIpAddress';
 
 export const ga4Event = async (eventName: string, eventParams: unknown = {}) => {
   if (!isProduction) {
@@ -13,10 +14,11 @@ export const ga4Event = async (eventName: string, eventParams: unknown = {}) => 
       url: 'https://www.google-analytics.com/mp/collect',
       method: 'POST',
       params: {
-        measurement_id: process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID,
+        measurement_id: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
         api_secret: process.env.GA4_API_SECRET
       },
       data: {
+        client_id: getReqIpAddress(),
         events: [
           {
             name: eventName,

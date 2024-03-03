@@ -56,7 +56,7 @@ export type MakeImageType = {
   caption?: string;
   font?: AcceptedFontType;
   weight?: AcceptedFontWeightType;
-  size?: number;
+  fontsize?: number;
 } & Omit<AcceptedFile, 'id' | 'size' | 'previewSrc'>;
 
 export type ConstructImageUrlType = {

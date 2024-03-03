@@ -29,7 +29,7 @@ export const GET = async (request: NextRequest, { params }: { params: { file: st
     const svgContent = generateSvgContent(validDimension, validOptions);
     const imageBuffer = await createImageBuffer(svgContent, format, validDimension, validOptions);
 
-    ga4Event('apiImage');
+    await ga4Event('api_image', { size: [validDimension.width, validDimension.height].join('x') });
 
     return new NextResponse(imageBuffer, {
       status: 200,
