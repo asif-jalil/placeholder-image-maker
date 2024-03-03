@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { isProduction } from './check-environment';
 
-export const ga4Event = async (eventName: string, eventParams?: unknown) => {
+export const ga4Event = async (eventName: string, eventParams: unknown = {}) => {
   if (!isProduction) {
     return;
   }
