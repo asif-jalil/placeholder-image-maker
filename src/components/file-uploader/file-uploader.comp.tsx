@@ -2,6 +2,8 @@ import { FileRejection, useDropzone } from 'react-dropzone';
 
 import Image from 'next/image';
 
+import CryptoJS from 'crypto-js';
+
 import uploadIllustration from '@/assets/images/file-upload.png';
 import ga from '@/utils/GA';
 import { ImageFormatType, getImageFormat } from '@/utils/image-format';
@@ -19,8 +21,10 @@ const FileUploader = ({ onSelect, accept, onReject, filesOnQueue }: FileUploader
         const img = new window.Image();
 
         img.onload = () => {
+          const uniqueId = [Date.now(), file.name].join('-');
+          const hash = CryptoJS.MD5(uniqueId).toString(CryptoJS.enc.Hex);
           const info = {
-            id: Date.now(),
+            id: hash,
             name: file.name.split('.').slice(0, -1).join('.'),
             extension: file.name.split('.').pop() as string,
             size: file.size,
