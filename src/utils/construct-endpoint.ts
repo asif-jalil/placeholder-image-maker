@@ -1,7 +1,5 @@
 import { ConstructImageUrlType } from '@/types/image';
 
-import { isProduction } from './check-environment';
-
 export const constructImageUrl = ({
   dimension,
   imageFormat,
@@ -12,7 +10,7 @@ export const constructImageUrl = ({
   font,
   size
 }: ConstructImageUrlType): string => {
-  const baseUrl = `${isProduction ? 'http://picseek.vercel.app' : 'http://localhost:3000'}/image/`;
+  const baseUrl = `${process.env.NEXT_PUBLIC_APP_URL}/image/`;
 
   const queryParams: { [key: string]: string | undefined } = {
     background: background ? background.replace('#', '') : undefined,

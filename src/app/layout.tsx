@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     { name: 'Asif Jalil', url: 'https://www.linkedin.com/in/asifjalil0/' },
     { name: 'Mostofa Nobi', url: 'https://www.linkedin.com/in/mostofanobi/' }
   ],
-  metadataBase: new URL('https://picitify.vercel.app')
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL as string)
 };
 
 const RootLayout = ({
