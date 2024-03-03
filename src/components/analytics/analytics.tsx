@@ -7,6 +7,7 @@ import { GoogleAnalytics } from 'nextjs-google-analytics';
 import { isProduction } from '@/utils/check-environment';
 
 const GAnalytics = () => {
+  console.log(process.env.NEXT_PUBLIC_VERCEL_ENV);
   if (!isProduction) {
     return <span />;
   }
