@@ -172,7 +172,7 @@ const CustomizePlaceholder = ({ bgColor, setBgColor, textColor, setTextColor }: 
         </div>
         <div>
           <h5 className='font-medium mb-2'>Font</h5>
-          <div className='grid grid-cols-1 sm:grid-cols-3 gap-5'>
+          <div className='grid grid-cols-1 sm:grid-cols-3 items-center gap-5'>
             <SelectInput<AcceptedFontType>
               data={fontList}
               value={font}

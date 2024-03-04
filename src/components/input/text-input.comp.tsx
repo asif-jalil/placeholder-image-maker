@@ -1,7 +1,7 @@
 import { TextInputProps } from './text-input.types';
 
 const TextInput = ({ label, showCounter = false, value, ...rest }: TextInputProps) => (
-  <div className='flex-1 rounded-xl mb-1 px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-dark'>
+  <div className='flex-1 rounded-xl px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-dark'>
     <label htmlFor={rest.id} className='block text-xs font-medium text-slate-900'>
       <span className='flex justify-between'>
         {label}
