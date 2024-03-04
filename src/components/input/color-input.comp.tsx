@@ -10,7 +10,7 @@ import generateRandomColor from '@/utils/generate-random-color';
 
 import { ColorInputProps } from './color-input.types';
 
-const ColorInput = ({ label, value, defaultValue, setRandomColor, ...rest }: ColorInputProps) => {
+const ColorInput = ({ id, label, value, defaultValue, setRandomColor, ...rest }: ColorInputProps) => {
   const [pickerColor, setPickerColor] = useState(value);
 
   useEffect(() => {
@@ -34,11 +34,12 @@ const ColorInput = ({ label, value, defaultValue, setRandomColor, ...rest }: Col
   return (
     <div className='flex'>
       <div className='flex-1 rounded-l-xl px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-dark'>
-        <label htmlFor='bg-color' className='block justify-between text-xs font-medium text-slate-900'>
+        <label htmlFor={id} className='block justify-between text-xs font-medium text-slate-900'>
           {label}
           <input
             type='text'
             value={value}
+            id={id}
             className='block w-full border-0 p-0 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6'
             {...rest}
           />
