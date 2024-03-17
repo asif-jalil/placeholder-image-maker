@@ -1,6 +1,8 @@
 import { MakeImageType } from '@/types/image';
 
+import calculateFontSize from './calculate-font-size';
 import { Format, ImageFormatType } from './image-format';
+import splitTextIntoLines from './split-text-into-lines';
 
 const makeImage = (imageConfig: MakeImageType) => {
   const canvas = document.createElement('canvas');
@@ -14,18 +16,9 @@ const makeImage = (imageConfig: MakeImageType) => {
   context.fillStyle = bgColor;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
-  let widthFactor: number;
-  const heightFactor = canvas.height / 2;
+  const fontSize = imageConfig.fontsize || calculateFontSize(canvas.width, canvas.height);
 
-  if (canvas.width < 200) {
-    widthFactor = canvas.width / 5;
-  } else {
-    widthFactor = canvas.width / 9;
-  }
-
-  const fontSize = imageConfig.fontsize || Math.min(widthFactor, heightFactor);
-
-  context.font = `${imageConfig.weight || '700'} ${fontSize}px ${imageConfig.font || 'Arial'}`;
+  context.font = `${imageConfig.weight || '400'} ${fontSize}px ${imageConfig.font || 'Arial'}`;
   context.textAlign = 'center';
   context.textBaseline = 'middle';
 
@@ -36,7 +29,15 @@ const makeImage = (imageConfig: MakeImageType) => {
   const centerY = canvas.height / 2;
 
   const text = imageConfig.caption || [imageConfig.width, imageConfig.height].join(' x ');
-  context.fillText(text, centerX, centerY);
+
+  const maxWidth = canvas.width * 0.9;
+  const lines = splitTextIntoLines(context, text, maxWidth);
+
+  const lineHeight = fontSize * 1.2;
+  const startY = centerY - ((lines.length - 1) * lineHeight) / 2;
+  lines.forEach((line, index) => {
+    context.fillText(line, centerX, startY + index * lineHeight);
+  });
 
   const type = ImageFormatType[imageConfig.type];
 

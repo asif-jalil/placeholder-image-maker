@@ -19,7 +19,8 @@
     "@typescript-eslint/no-unsafe-return": "warn",
     "@typescript-eslint/no-floating-promises": "off",
     "react/react-in-jsx-scope": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-param-reassign": "warn"
   },
   "parserOptions": {
     "project": "./tsconfig.json"
