@@ -51,7 +51,7 @@ export const generateSvgContent = (validDimension: DimensionType, validOptions: 
               <![CDATA[   
                 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Lora:wght@400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap');
                 text{
-                  font: ${validOptions.weight} ${fontSize}px ${validOptions.font},sans-serif;
+                  font: ${validOptions.weight} ${fontSize}px ${validOptions.font},sans-serif,system-ui;
                 }
               ]]> 
             </style>
