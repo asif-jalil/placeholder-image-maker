@@ -10,7 +10,7 @@ export enum AcceptedFont {
   'Lato' = 'Lato',
   'Lora' = 'Lora',
   'Montserrat' = 'Montserrat',
-  'system-ui' = 'system-ui'
+  'Noto Sans' = 'Noto Sans'
 }
 
 export type AcceptedFontType =
@@ -23,7 +23,7 @@ export type AcceptedFontType =
   | 'Lato'
   | 'Lora'
   | 'Montserrat'
-  | 'system-ui';
+  | 'Noto Sans';
 
 export enum AcceptedFontWeight {
   'Thin' = '100',

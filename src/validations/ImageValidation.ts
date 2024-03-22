@@ -24,10 +24,10 @@ export const ImageParamsValidation = z.object({
       'Lato',
       'Lora',
       'Montserrat',
-      'system-ui'
+      'Noto Sans'
     ])
     .optional()
-    .default('system-ui'),
+    .default('Noto Sans'),
   weight: z.enum(['100', '200', '300', '400', '500', '600', '700', '800', '900']).optional().default('400'),
   size: checkNumberAsString('font size').optional()
 });
