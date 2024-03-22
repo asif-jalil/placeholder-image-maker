@@ -50,10 +50,13 @@ export const generateSvgContent = (validDimension: DimensionType, validOptions: 
             <style type="text/css">
               <![CDATA[   
                 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Lora:wght@400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+                text{
+                  font: ${validOptions.weight} ${fontSize} ${validOptions.font};
+                }
               ]]> 
             </style>
             <rect width="100%" height="100%" fill="${validOptions.background}" />
-            <text font-family="${validOptions.font}" font-size="${fontSize}" font-weight="${validOptions.weight}" fill="${validOptions.textcolor}" text-anchor="middle" alignment-baseline="middle" y="${centerY}">
+            <text fill="${validOptions.textcolor}" text-anchor="middle" alignment-baseline="middle" y="${centerY}">
               ${textElements}
             </text>
           </svg>`;
