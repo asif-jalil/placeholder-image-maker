@@ -9,8 +9,10 @@ const splitTextIntoLines = (context: CanvasRenderingContext2D, text: string, max
 
     if (line && testWidth > maxWidth) {
       lines.push(word);
+    } else if (line) {
+      lines[lines.length - 1] = updatedLine; // Update the current line
     } else {
-      lines[lines.length - 1] = updatedLine;
+      lines.push(updatedLine); // Push the first word as the first line
     }
 
     return lines;
