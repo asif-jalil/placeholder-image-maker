@@ -9,7 +9,8 @@ export enum AcceptedFont {
   'Segoe UI' = 'Segoe UI',
   'Lato' = 'Lato',
   'Lora' = 'Lora',
-  'Montserrat' = 'Montserrat'
+  'Montserrat' = 'Montserrat',
+  'system-ui' = 'system-ui'
 }
 
 export type AcceptedFontType =
@@ -21,7 +22,8 @@ export type AcceptedFontType =
   | 'Segoe UI'
   | 'Lato'
   | 'Lora'
-  | 'Montserrat';
+  | 'Montserrat'
+  | 'system-ui';
 
 export enum AcceptedFontWeight {
   'Thin' = '100',

@@ -14,9 +14,20 @@ export const ImageParamsValidation = z.object({
   textcolor: colorType.optional().default('#000000'),
   text: z.string().max(50, { message: 'Maximum 50 characters are allowed' }).optional(),
   font: z
-    .enum(['Arial', 'Helvetica', 'Georgia', 'Roboto', 'Open Sans', 'Segoe UI', 'Lato', 'Lora', 'Montserrat'])
+    .enum([
+      'Arial',
+      'Helvetica',
+      'Georgia',
+      'Roboto',
+      'Open Sans',
+      'Segoe UI',
+      'Lato',
+      'Lora',
+      'Montserrat',
+      'system-ui'
+    ])
     .optional()
-    .default('Arial'),
-  weight: z.enum(['100', '200', '300', '400', '500', '600', '700', '800', '900']).optional().default('700'),
+    .default('system-ui'),
+  weight: z.enum(['100', '200', '300', '400', '500', '600', '700', '800', '900']).optional().default('400'),
   size: checkNumberAsString('font size').optional()
 });

@@ -2,18 +2,55 @@ import sharp, { Color, FormatEnum } from 'sharp';
 
 import { DimensionType, OptionsType } from '@/types/image';
 
+import calculateFontSize from './calculate-font-size';
 import { ApiImageFormat } from './image-format';
+
+const splitTextIntoLines = (text: string, maxWidth: number, fontSize: number) => {
+  const words = text.split(' ');
+
+  return words.reduce((lines: string[], word: string) => {
+    const line = lines[lines.length - 1];
+    const updatedLine = line ? [line, word].join(' ') : word;
+
+    const FONT_ADJUSTMENT_FACTOR = 0.62;
+    const AVERAGE_CHARACTER_WIDTH = 0.735;
+    const estimatedWidth = updatedLine.length * fontSize * AVERAGE_CHARACTER_WIDTH * FONT_ADJUSTMENT_FACTOR;
+
+    if (line && estimatedWidth > maxWidth) {
+      lines.push(word);
+    } else if (line) {
+      lines[lines.length - 1] = updatedLine; // Update the current line
+    } else {
+      lines.push(updatedLine); // Push the first word as the first line
+    }
+
+    return lines;
+  }, []);
+};
 
 export const generateSvgContent = (validDimension: DimensionType, validOptions: OptionsType) => {
   const { width, height } = validDimension;
-  const fontSize = validOptions.size || Math.min(width < 200 ? width / 5 : width / 9, (height as number) / 2);
-  const centerX = width / 2;
-  const centerY = (height as number) / 2 + (fontSize * 0.3) / 2;
+
+  const fontSize = validOptions.size || calculateFontSize(width, height as number);
+
   const text = validOptions.text || [width, height].join(' x ');
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+  const maxWidth = width * 0.9;
+  const lines = splitTextIntoLines(text, maxWidth, fontSize);
+
+  const centerY = (height as number) / 2;
+
+  const lineHeight = fontSize * 1.2;
+  const startY = centerY - ((lines.length - 1) * lineHeight) / 2;
+  const textElements = lines
+    .map((line, index) => `<tspan x="50%" y="${startY + index * lineHeight}px" text-anchor="middle">${line}</tspan>`)
+    .join(' ');
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${maxWidth}" height="${height}">
             <rect width="100%" height="100%" fill="${validOptions.background}" />
-            <text x="${centerX}" y="${centerY}" font-family="${validOptions.font}" font-size="${fontSize}" font-weight="${validOptions.weight}" fill="${validOptions.textcolor}" text-anchor="middle" alignment-baseline="middle">${text}</text>
+            <text font-family="${validOptions.font}" font-size="${fontSize}" font-weight="${validOptions.weight}" fill="${validOptions.textcolor}" text-anchor="middle" alignment-baseline="middle" y="${centerY}">
+              ${textElements}
+            </text>
           </svg>`;
 };
 

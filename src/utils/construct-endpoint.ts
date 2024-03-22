@@ -43,5 +43,5 @@ export const constructImageUrl = ({
     imageUrl += `?${queryParamsString}`;
   }
 
-  return imageUrl;
+  return encodeURI(imageUrl);
 };
